@@ -1,6 +1,6 @@
 defmodule Monisapp.Accounts.UserToken do
   use Ecto.Schema
-  import Ecto.Changeset
+  import Ecto.Query
 
   @hash_algorithm :sha256
   @rand_size 32
@@ -28,7 +28,7 @@ defmodule Monisapp.Accounts.UserToken do
   """
   def build_session_token(user) do
     token = :crypto.strong_rand_bytes(@rand_size)
-    {token, %Demo.Accounts.UserToken{token: token, context: "session", user_id: user.id}}
+    {token, %Monisapp.Accounts.UserToken{token: token, context: "session", user_id: user.id}}
   end
 
   @doc """
@@ -61,7 +61,7 @@ defmodule Monisapp.Accounts.UserToken do
     hashed_token = :crypto.hash(@hash_algorithm, token)
 
     {Base.url_encode64(token, padding: false),
-     %Demo.Accounts.UserToken{
+     %Monisapp.Accounts.UserToken{
        token: hashed_token,
        context: context,
        sent_to: sent_to,
@@ -119,17 +119,17 @@ defmodule Monisapp.Accounts.UserToken do
   Returns the given token with the given context.
   """
   def token_and_context_query(token, context) do
-    from Demo.Accounts.UserToken, where: [token: ^token, context: ^context]
+    from Monisapp.Accounts.UserToken, where: [token: ^token, context: ^context]
   end
 
   @doc """
   Gets all tokens for the given user for the given contexts.
   """
   def user_and_contexts_query(user, :all) do
-    from t in Demo.Accounts.UserToken, where: t.user_id == ^user.id
+    from t in Monisapp.Accounts.UserToken, where: t.user_id == ^user.id
   end
 
   def user_and_contexts_query(user, [_ | _] = contexts) do
-    from t in Demo.Accounts.UserToken, where: t.user_id == ^user.id and t.context in ^contexts
+    from t in Monisapp.Accounts.UserToken, where: t.user_id == ^user.id and t.context in ^contexts
   end
 end
