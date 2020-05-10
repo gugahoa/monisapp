@@ -13,10 +13,6 @@ defmodule MonisAppWeb.Router do
     plug :fetch_current_user
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
   scope "/", MonisAppWeb do
     pipe_through [:browser, :redirect_if_user_is_authenticated]
 

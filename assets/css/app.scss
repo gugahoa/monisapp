@@ -90,3 +90,20 @@
 .alert:empty {
   display: none;
 }
+
+/* Custom CSS */
+.toggle__line {
+  @apply bg-red-500;
+}
+
+input:checked ~ .toggle__line {
+  @apply bg-green-500;
+}
+
+.toggle__dot {
+  @apply font-semibold text-black;
+}
+
+input:checked ~ .toggle__dot {
+  @apply translate-x-full;
+}

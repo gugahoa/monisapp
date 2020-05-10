@@ -10,6 +10,7 @@ defmodule MonisAppWeb.UserSessionController do
 
   def create(conn, %{"user" => user_params}) do
     %{"email" => email, "password" => password} = user_params
+
     if user = Accounts.get_user_by_email_and_password(email, password) do
       UserAuth.login_user(conn, user, user_params)
     else
