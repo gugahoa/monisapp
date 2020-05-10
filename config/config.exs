@@ -7,11 +7,11 @@
 # General application configuration
 use Mix.Config
 
-config :monisapp,
+config :monis_app,
   ecto_repos: [MonisApp.Repo]
 
 # Configures the endpoint
-config :monisapp, MonisAppWeb.Endpoint,
+config :monis_app, MonisAppWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "j3r0G53BqfKtXTgyWnvLHzpGc5U8ErUkJnGd1i7ookCf/NuzkYAtoyZYwbuUHgoZ",
   render_errors: [view: MonisAppWeb.ErrorView, accepts: ~w(html json), layout: false],

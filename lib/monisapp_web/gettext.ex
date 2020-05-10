@@ -20,5 +20,5 @@ defmodule MonisAppWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :monisapp
+  use Gettext, otp_app: :monis_app
 end

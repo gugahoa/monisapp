@@ -1,12 +1,12 @@
 defmodule MonisAppWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :monisapp
+  use Phoenix.Endpoint, otp_app: :monis_app
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
-    key: "_monisapp_key",
+    key: "_monis_app_key",
     signing_salt: "ck1F7ww9"
   ]
 
@@ -22,7 +22,7 @@ defmodule MonisAppWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :monisapp,
+    from: :monis_app,
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
@@ -32,7 +32,7 @@ defmodule MonisAppWeb.Endpoint do
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
-    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :monisapp
+    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :monis_app
   end
 
   plug Phoenix.LiveDashboard.RequestLogger,
