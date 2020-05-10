@@ -1,3 +1,3 @@
-defmodule MonisappWeb.LayoutView do
-  use MonisappWeb, :view
+defmodule MonisAppWeb.LayoutView do
+  use MonisAppWeb, :view
 end

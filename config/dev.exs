@@ -1,7 +1,7 @@
 use Mix.Config
 
 # Configure your database
-config :monisapp, Monisapp.Repo,
+config :monisapp, MonisApp.Repo,
   username: "postgres",
   password: "postgres",
   database: "monisapp_dev",
@@ -15,7 +15,7 @@ config :monisapp, Monisapp.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :monisapp, MonisappWeb.Endpoint,
+config :monisapp, MonisAppWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -55,7 +55,7 @@ config :monisapp, MonisappWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :monisapp, MonisappWeb.Endpoint,
+config :monisapp, MonisAppWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",

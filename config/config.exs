@@ -8,14 +8,14 @@
 use Mix.Config
 
 config :monisapp,
-  ecto_repos: [Monisapp.Repo]
+  ecto_repos: [MonisApp.Repo]
 
 # Configures the endpoint
-config :monisapp, MonisappWeb.Endpoint,
+config :monisapp, MonisAppWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "j3r0G53BqfKtXTgyWnvLHzpGc5U8ErUkJnGd1i7ookCf/NuzkYAtoyZYwbuUHgoZ",
-  render_errors: [view: MonisappWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: Monisapp.PubSub,
+  render_errors: [view: MonisAppWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: MonisApp.PubSub,
   live_view: [signing_salt: "mFLcAUaV"]
 
 # Configures Elixir's Logger

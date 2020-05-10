@@ -1,4 +1,4 @@
-defmodule Monisapp.Repo.Migrations.CreateUsers do
+defmodule MonisApp.Repo.Migrations.CreateUsers do
   use Ecto.Migration
 
   def change do

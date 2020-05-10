@@ -1,5 +1,5 @@
-defmodule MonisappWeb.ErrorView do
-  use MonisappWeb, :view
+defmodule MonisAppWeb.ErrorView do
+  use MonisAppWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

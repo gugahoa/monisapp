@@ -1,0 +1,31 @@
+<div class="flex items-center justify-center w-screen h-screen bg-indigo-200">
+  <div class="flex flex-col p-12 bg-white shadow">
+    <h1 class="px-10 mb-2 text-2xl font-semibold text-center">Faça login na sua conta</h1>
+    <%= if @error_message do %>
+      <p class="alert alert-danger">
+        <%= @error_message %>
+      </p>
+    <% end %>
+
+    <%= form_for @conn, Routes.user_session_path(@conn, :create), [as: :user, class: "flex flex-col mt-4"], fn f -> %>
+      <%= label f, :email, class: "text-sm font-semibold text-gray-600" %>
+      <%= text_input f, :email, class: "mb-2 p-3 border border-gray-200 focus:border-blue-400 rounded" %>
+
+      <%= label f, :password, class: "text-sm font-semibold text-gray-600" %>
+      <%= password_input f, :password, class: "mb-2 p-3 border border-gray-200 focus:border-blue-400 rounded" %>
+
+      <label for="user_remember_me" class="mb-5 text-xs cursor-pointer">
+        <%= checkbox f, :remember_me %>
+        <span class="ml-1">Lembrar de mim</span>
+      </label>
+
+      <%= submit "Login", class: "bg-blue-700 h-12 text-white rounded hover:bg-blue-600" %>
+    <% end %>
+
+    <a 
+      href="<%= Routes.user_registration_path(@conn, :new) %>"
+      class="self-center mt-4 text-sm text-gray-700 cursor-pointer hover:text-black">
+      Não possui conta? Cadastre-se
+    </a>
+  </div>
+</div>

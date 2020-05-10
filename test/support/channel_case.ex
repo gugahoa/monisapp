@@ -1,4 +1,4 @@
-defmodule MonisappWeb.ChannelCase do
+defmodule MonisAppWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -11,7 +11,7 @@ defmodule MonisappWeb.ChannelCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use MonisappWeb.ChannelCase, async: true`, although
+  by setting `use MonisAppWeb.ChannelCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -21,18 +21,18 @@ defmodule MonisappWeb.ChannelCase do
     quote do
       # Import conveniences for testing with channels
       import Phoenix.ChannelTest
-      import MonisappWeb.ChannelCase
+      import MonisAppWeb.ChannelCase
 
       # The default endpoint for testing
-      @endpoint MonisappWeb.Endpoint
+      @endpoint MonisAppWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Monisapp.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(MonisApp.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Monisapp.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(MonisApp.Repo, {:shared, self()})
     end
 
     :ok

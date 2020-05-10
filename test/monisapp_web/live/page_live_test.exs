@@ -1,5 +1,5 @@
-defmodule MonisappWeb.PageLiveTest do
-  use MonisappWeb.ConnCase
+defmodule MonisAppWeb.PageLiveTest do
+  use MonisAppWeb.ConnCase
 
   import Phoenix.LiveViewTest
 

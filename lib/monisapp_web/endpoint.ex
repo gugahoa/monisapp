@@ -1,4 +1,4 @@
-defmodule MonisappWeb.Endpoint do
+defmodule MonisAppWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :monisapp
 
   # The session will be stored in the cookie and signed,
@@ -10,7 +10,7 @@ defmodule MonisappWeb.Endpoint do
     signing_salt: "ck1F7ww9"
   ]
 
-  socket "/socket", MonisappWeb.UserSocket,
+  socket "/socket", MonisAppWeb.UserSocket,
     websocket: true,
     longpoll: false
 
@@ -50,5 +50,5 @@ defmodule MonisappWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug MonisappWeb.Router
+  plug MonisAppWeb.Router
 end

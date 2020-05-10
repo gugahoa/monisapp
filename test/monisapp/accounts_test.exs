@@ -1,10 +1,10 @@
-defmodule Monisapp.AccountsTest do
-  use Monisapp.DataCase
+defmodule MonisApp.AccountsTest do
+  use MonisApp.DataCase
 
-  alias Monisapp.Accounts
+  alias MonisApp.Accounts
 
   describe "users" do
-    alias Monisapp.Accounts.User
+    alias MonisApp.Accounts.User
 
     @valid_attrs %{
       email: "some_valid@email.com",

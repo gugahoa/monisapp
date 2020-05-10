@@ -1,12 +1,12 @@
-defmodule MonisappWeb do
+defmodule MonisAppWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use MonisappWeb, :controller
-      use MonisappWeb, :view
+      use MonisAppWeb, :controller
+      use MonisAppWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,11 +19,11 @@ defmodule MonisappWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: MonisappWeb
+      use Phoenix.Controller, namespace: MonisAppWeb
 
       import Plug.Conn
-      import MonisappWeb.Gettext
-      alias MonisappWeb.Router.Helpers, as: Routes
+      import MonisAppWeb.Gettext
+      alias MonisAppWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -31,7 +31,7 @@ defmodule MonisappWeb do
     quote do
       use Phoenix.View,
         root: "lib/monisapp_web/templates",
-        namespace: MonisappWeb
+        namespace: MonisAppWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
@@ -44,7 +44,7 @@ defmodule MonisappWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {MonisappWeb.LayoutView, "live.html"}
+        layout: {MonisAppWeb.LayoutView, "live.html"}
 
       unquote(view_helpers())
     end
@@ -71,7 +71,7 @@ defmodule MonisappWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import MonisappWeb.Gettext
+      import MonisAppWeb.Gettext
     end
   end
 
@@ -86,9 +86,9 @@ defmodule MonisappWeb do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
-      import MonisappWeb.ErrorHelpers
-      import MonisappWeb.Gettext
-      alias MonisappWeb.Router.Helpers, as: Routes
+      import MonisAppWeb.ErrorHelpers
+      import MonisAppWeb.Gettext
+      alias MonisAppWeb.Router.Helpers, as: Routes
     end
   end
 

@@ -1,4 +1,4 @@
-defmodule Monisapp.Accounts.User do
+defmodule MonisApp.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -25,7 +25,7 @@ defmodule Monisapp.Accounts.User do
     |> validate_required([:email])
     |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "must have the @ sign and no spaces")
     |> validate_length(:email, max: 160)
-    |> unsafe_validate_unique(:email, Monisapp.Repo)
+    |> unsafe_validate_unique(:email, MonisApp.Repo)
     |> unique_constraint(:email)
   end
 
@@ -33,6 +33,7 @@ defmodule Monisapp.Accounts.User do
     changeset
     |> validate_required([:password])
     |> validate_length(:password, min: 12, max: 80)
+    |> validate_confirmation(:password, message: "does not match password")
     |> prepare_changes(&hash_password/1)
   end
 
@@ -50,7 +51,7 @@ defmodule Monisapp.Accounts.User do
   If there is no user or the user doesn't have a password, we call
   `Bcrypt.no_user_verify/0` to avoid timing attacks.
   """
-  def valid_password?(%Monisapp.Accounts.User{hashed_password: hashed_password}, password)
+  def valid_password?(%MonisApp.Accounts.User{hashed_password: hashed_password}, password)
       when is_binary(hashed_password) and byte_size(password) > 0 do
     Bcrypt.verify_pass(password, hashed_password)
   end

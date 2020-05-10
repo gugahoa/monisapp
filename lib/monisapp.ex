@@ -1,6 +1,6 @@
-defmodule Monisapp do
+defmodule MonisApp do
   @moduledoc """
-  Monisapp keeps the contexts that define your domain
+  MonisApp keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

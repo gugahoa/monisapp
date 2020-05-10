@@ -1,4 +1,4 @@
-defmodule MonisappWeb.ErrorHelpers do
+defmodule MonisAppWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -8,10 +8,11 @@ defmodule MonisappWeb.ErrorHelpers do
   @doc """
   Generates tag for inlined form input errors.
   """
-  def error_tag(form, field) do
+  def error_tag(form, field, opts \\ []) do
+    class = Keyword.get(opts, :class)
     Enum.map(Keyword.get_values(form.errors, field), fn error ->
       content_tag(:span, translate_error(error),
-        class: "invalid-feedback",
+        class: if(class == nil, do: "invalid-feedback", else: "invalid-feedback #{class}"),
         phx_feedback_for: input_id(form, field)
       )
     end)
@@ -39,9 +40,9 @@ defmodule MonisappWeb.ErrorHelpers do
     # should be written to the errors.po file. The :count option is
     # set by Ecto and indicates we should also apply plural rules.
     if count = opts[:count] do
-      Gettext.dngettext(MonisappWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(MonisAppWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(MonisappWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(MonisAppWeb.Gettext, "errors", msg, opts)
     end
   end
 end

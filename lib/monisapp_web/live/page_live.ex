@@ -1,5 +1,5 @@
-defmodule MonisappWeb.PageLive do
-  use MonisappWeb, :live_view
+defmodule MonisAppWeb.PageLive do
+  use MonisAppWeb, :live_view
 
   @impl true
   def mount(_params, _session, socket) do
@@ -26,7 +26,7 @@ defmodule MonisappWeb.PageLive do
   end
 
   defp search(query) do
-    if not MonisappWeb.Endpoint.config(:code_reloader) do
+    if not MonisAppWeb.Endpoint.config(:code_reloader) do
       raise "action disabled when not in development"
     end
 

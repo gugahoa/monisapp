@@ -1,4 +1,4 @@
-defmodule Monisapp.Accounts.UserToken do
+defmodule MonisApp.Accounts.UserToken do
   use Ecto.Schema
   import Ecto.Query
 
@@ -21,14 +21,14 @@ defmodule Monisapp.Accounts.UserToken do
     timestamps(updated_at: false)
   end
 
-    @doc """
+  @doc """
   Generates a token that will be stored in a signed place,
   such as session or cookie. As they are signed, those
   tokens do not need to be hashed.
   """
   def build_session_token(user) do
     token = :crypto.strong_rand_bytes(@rand_size)
-    {token, %Monisapp.Accounts.UserToken{token: token, context: "session", user_id: user.id}}
+    {token, %MonisApp.Accounts.UserToken{token: token, context: "session", user_id: user.id}}
   end
 
   @doc """
@@ -61,7 +61,7 @@ defmodule Monisapp.Accounts.UserToken do
     hashed_token = :crypto.hash(@hash_algorithm, token)
 
     {Base.url_encode64(token, padding: false),
-     %Monisapp.Accounts.UserToken{
+     %MonisApp.Accounts.UserToken{
        token: hashed_token,
        context: context,
        sent_to: sent_to,
@@ -119,17 +119,17 @@ defmodule Monisapp.Accounts.UserToken do
   Returns the given token with the given context.
   """
   def token_and_context_query(token, context) do
-    from Monisapp.Accounts.UserToken, where: [token: ^token, context: ^context]
+    from MonisApp.Accounts.UserToken, where: [token: ^token, context: ^context]
   end
 
   @doc """
   Gets all tokens for the given user for the given contexts.
   """
   def user_and_contexts_query(user, :all) do
-    from t in Monisapp.Accounts.UserToken, where: t.user_id == ^user.id
+    from t in MonisApp.Accounts.UserToken, where: t.user_id == ^user.id
   end
 
   def user_and_contexts_query(user, [_ | _] = contexts) do
-    from t in Monisapp.Accounts.UserToken, where: t.user_id == ^user.id and t.context in ^contexts
+    from t in MonisApp.Accounts.UserToken, where: t.user_id == ^user.id and t.context in ^contexts
   end
 end

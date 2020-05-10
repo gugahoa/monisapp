@@ -1,12 +1,12 @@
-defmodule Monisapp.Accounts do
+defmodule MonisApp.Accounts do
   @moduledoc """
   The Accounts context.
   """
 
   import Ecto.Query, warn: false
-  alias Monisapp.Repo
+  alias MonisApp.Repo
 
-  alias Monisapp.Accounts.User
+  alias MonisApp.Accounts.User
 
   @doc """
   Returns the list of users.
@@ -55,6 +55,16 @@ defmodule Monisapp.Accounts do
     if User.valid_password?(user, password), do: user
   end
 
+  alias MonisApp.Accounts.UserToken
+
+  @doc """
+  Gets the user with the given signed token.
+  """
+  def get_user_by_session_token(token) do
+    {:ok, query} = UserToken.verify_session_token_query(token)
+    Repo.one(query)
+  end
+
   @doc """
   Register a user.
 
@@ -100,5 +110,17 @@ defmodule Monisapp.Accounts do
   """
   def change_user_registration(%User{} = user, attrs \\ %{}) do
     User.registration_changeset(user, attrs)
+  end
+
+  ## Session
+  alias MonisApp.Accounts.UserToken
+
+  @doc """
+  Generates a session token.
+  """
+  def generate_session_token(user) do
+    {token, user_token} = UserToken.build_session_token(user)
+    Repo.insert!(user_token)
+    token
   end
 end

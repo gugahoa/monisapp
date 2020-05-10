@@ -1,4 +1,4 @@
-defmodule Monisapp.Repo.Migrations.CreateUserTokens do
+defmodule MonisApp.Repo.Migrations.CreateUserTokens do
   use Ecto.Migration
 
   def change do
@@ -8,7 +8,7 @@ defmodule Monisapp.Repo.Migrations.CreateUserTokens do
       add :context, :string, null: false
       add :sent_to, :string
 
-      timestamps(udpated_at: false)
+      timestamps(updated_at: false)
     end
 
     create unique_index(:user_tokens, [:context, :token])
