@@ -9,6 +9,8 @@ defmodule MonisApp.Accounts.User do
     field :hashed_password, :string
     field :password, :string, virtual: true
 
+    has_many :categories, MonisApp.Finance.Category
+
     timestamps()
   end
 
