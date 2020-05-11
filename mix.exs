@@ -1,4 +1,4 @@
-defmodule Monisapp.MixProject do
+defmodule MonisApp.MixProject do
   use Mix.Project
 
   def project do

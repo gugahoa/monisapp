@@ -1,4 +1,4 @@
-# Monisapp
+# MonisApp
 
 To start your Phoenix server:
 
