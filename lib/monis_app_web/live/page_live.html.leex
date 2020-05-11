@@ -1,4 +1,4 @@
 <div class="relative min-h-screen bg-indigo-200 min-w-screen">
   <p class="text-white">Hello, world!</p>
-  <%= live_component @socket, MonisAppWeb.TransactionModalComponent %>
+  <%= live_component @socket, MonisAppWeb.TransactionModalComponent, current_user: @current_user %>
 </div>
