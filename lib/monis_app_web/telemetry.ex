@@ -29,11 +29,11 @@ defmodule MonisAppWeb.Telemetry do
       ),
 
       # Database Metrics
-      summary("monisapp.repo.query.total_time", unit: {:native, :millisecond}),
-      summary("monisapp.repo.query.decode_time", unit: {:native, :millisecond}),
-      summary("monisapp.repo.query.query_time", unit: {:native, :millisecond}),
-      summary("monisapp.repo.query.queue_time", unit: {:native, :millisecond}),
-      summary("monisapp.repo.query.idle_time", unit: {:native, :millisecond}),
+      summary("monis_app.repo.query.total_time", unit: {:native, :millisecond}),
+      summary("monis_app.repo.query.decode_time", unit: {:native, :millisecond}),
+      summary("monis_app.repo.query.query_time", unit: {:native, :millisecond}),
+      summary("monis_app.repo.query.queue_time", unit: {:native, :millisecond}),
+      summary("monis_app.repo.query.idle_time", unit: {:native, :millisecond}),
 
       # VM Metrics
       summary("vm.memory.total", unit: {:byte, :kilobyte}),

@@ -30,7 +30,7 @@ defmodule MonisAppWeb do
   def view do
     quote do
       use Phoenix.View,
-        root: "lib/monisapp_web/templates",
+        root: "lib/monis_app_web/templates",
         namespace: MonisAppWeb
 
       # Import convenience functions from controllers
