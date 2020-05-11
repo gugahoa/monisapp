@@ -39,7 +39,7 @@ defmodule MonisApp.FinanceTest do
       assert Finance.get_category!(category.id) == category
     end
 
-    test "create_category/1 with valid data creates a category" do
+    test "create_category/2 with valid data creates a category" do
       user = user_fixture()
       assert {:ok, %Category{} = category} = Finance.create_category(user, @valid_attrs)
       assert category.hidden == true
@@ -47,7 +47,7 @@ defmodule MonisApp.FinanceTest do
       assert category.type == "expense"
     end
 
-    test "create_category/1 with invalid data returns error changeset" do
+    test "create_category/2 with invalid data returns error changeset" do
       user = user_fixture()
       assert {:error, %Ecto.Changeset{}} = Finance.create_category(user, @invalid_attrs)
     end
@@ -106,15 +106,15 @@ defmodule MonisApp.FinanceTest do
       assert Finance.get_account!(account.id) == account
     end
 
-    test "create_account/1 with valid data creates a account" do
-      assert {:ok, %Account{} = account} = Finance.create_account(@valid_attrs)
+    test "create_account/2 with valid data creates a account" do
+      assert {:ok, %Account{} = account} = Finance.create_account(user_fixture(), @valid_attrs)
       assert account.amount == Decimal.new("120.5")
       assert account.is_active == true
       assert account.type == "some type"
     end
 
-    test "create_account/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Finance.create_account(@invalid_attrs)
+    test "create_account/2 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Finance.create_account(user_fixture(), @invalid_attrs)
     end
 
     test "update_account/2 with valid data updates the account" do
