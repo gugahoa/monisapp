@@ -10,10 +10,6 @@ defmodule MonisApp.AccountsTest do
       email: "some_valid@email.com",
       password: "valid password"
     }
-    @update_attrs %{
-      email: "some_updated@email.com",
-      password: "updated valid password"
-    }
     @invalid_attrs %{confirmed_at: nil, email: nil, password: nil}
 
     def user_fixture(attrs \\ %{}) do
