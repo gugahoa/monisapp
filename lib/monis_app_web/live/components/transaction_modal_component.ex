@@ -4,12 +4,15 @@ defmodule MonisAppWeb.TransactionModalComponent do
   alias MonisApp.Finance
 
   def update(%{current_user: user} = assigns, socket) do
-    socket = assign(socket, :accounts, Finance.list_accounts(user))
-    assigns = Map.merge(socket.assigns, assigns)
-    {:ok, %{socket | assigns: assigns}}
+    socket =
+      socket
+      |> assign(assigns)
+      |> assign(accounts: Finance.list_accounts(user))
+      
+    {:ok, socket}
   end
 
-  def handle_event("change-forms", %{"account" => search_term} = params, socket) do
+  def handle_event("change-forms", %{"account" => search_term}, socket) do
     {:noreply, assign(socket, :accounts, Finance.search_accounts(search_term))}
   end
 end
