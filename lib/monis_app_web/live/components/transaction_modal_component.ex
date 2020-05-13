@@ -1,5 +1,6 @@
 defmodule MonisAppWeb.TransactionModalComponent do
   use Phoenix.LiveComponent
+  use Phoenix.HTML
 
   alias MonisApp.Finance
 

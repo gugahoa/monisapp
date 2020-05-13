@@ -1,7 +1,7 @@
 <div class="fixed inset-0 flex items-end px-4 pb-4 sm:items-center sm:justify-center">
   <div class="absolute inset-0 bg-gray-500 opacity-75" />
   </div>
-  <form phx-target="<%= @myself %>" phx-change="change-forms" phx-debounce="200">
+  <%= form_for nil, "#", [phx_target: @myself, phx_change: "change-forms"] %>
     <div
       class="w-full overflow-hidden bg-white rounded-lg shadow-xl transform transition-all sm:max-w-lg">
       <div class="px-4 pt-5 pb-4 bg-white sm:p-6 sm:pb-4">
