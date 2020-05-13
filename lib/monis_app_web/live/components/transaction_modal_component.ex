@@ -10,7 +10,19 @@ defmodule MonisAppWeb.TransactionModalComponent do
     {:ok, %{socket | assigns: assigns}}
   end
 
-  def handle_event("change-forms", %{"account" => search_term} = params, socket) do
-    {:noreply, assign(socket, :accounts, Finance.search_accounts(search_term))}
+  def handle_event(
+        "change-forms",
+        %{"_target" => targets, "account" => search_term} = params,
+        socket
+      ) do
+    socket =
+      if "account" in targets do
+        assign(socket, :accounts, Finance.search_accounts(search_term))
+      else
+        socket
+      end
+
+    IO.inspect(params)
+    {:noreply, socket}
   end
 end
