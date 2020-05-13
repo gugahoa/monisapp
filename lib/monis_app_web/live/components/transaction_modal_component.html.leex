@@ -26,6 +26,7 @@
                         class="block w-full form-input"
                         placeholder="Account"
                         list="accounts"
+                        phx-throttle="400"
                       />
                       <datalist id="accounts">
                         <%= for account <- @accounts do %>
