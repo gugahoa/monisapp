@@ -50,13 +50,15 @@
                 <div class="flex flex-col px-2">
                   <div>
                     <label 
-                     for="amount" 
+                     for="amount"
                      class="block text-sm font-medium text-left text-gray-700 leading-5">
                       Amount
                     </label>
                     <div class="relative flex">
                       <input 
                        type="text" 
+                       inputmode="numeric" 
+                       pattern="[0-9]*"
                        name="amount" 
                        id="amount" 
                        class="block w-full form-input"
