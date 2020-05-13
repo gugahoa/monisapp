@@ -27,7 +27,7 @@
                         placeholder="Account"
                         list="accounts"
                       />
-                      <datalist id="accounts" class="mt-1 rounded shadow-md">
+                      <datalist id="accounts">
                         <%= for account <- @accounts do %>
                           <option value="<%= account.name %>"/>
                         <% end %>
