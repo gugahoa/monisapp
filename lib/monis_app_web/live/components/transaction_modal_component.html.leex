@@ -1,7 +1,7 @@
 <div class="fixed inset-0 flex items-end px-4 pb-4 sm:items-center sm:justify-center">
   <div class="absolute inset-0 bg-gray-500 opacity-75" />
   </div>
-  <%= form_for nil, "#", [phx_target: @myself, phx_change: "change-forms"] %>
+  <%= f= form_for @changeset, "#", [phx_target: @myself, phx_change: "change-forms", phx_submit: "create-transaction"] %>
     <div
       class="w-full overflow-hidden bg-white rounded-lg shadow-xl transform transition-all sm:max-w-lg">
       <div class="px-4 pt-5 pb-4 bg-white sm:p-6 sm:pb-4">
@@ -14,20 +14,8 @@
               <div class="flex flex-col -mx-2 sm:flex-row">
                 <div class="flex flex-col px-2">
                   <div>
-                    <label
-                      for="account"
-                      class="flex flex-col block text-sm font-medium text-left text-gray-700 leading-5">
-                      Account
-                    </label>
-                      <input 
-                        type="text" 
-                        name="account" 
-                        id="account" 
-                        class="block w-full form-input"
-                        placeholder="Account"
-                        list="accounts"
-                        phx-throttle="400"
-                      />
+                    <%= label f, :account, class: "block text-sm font-medium text-left text-gray-700 leading-5" %>
+                    <%= text_input f, :account, class: "block w-full form-input", placeholder: "Account", list: "accounts", phx_throttle: 400 %>
                       <datalist id="accounts">
                         <%= for account <- @accounts do %>
                           <option value="<%= account.name %>"/>
@@ -35,39 +23,18 @@
                       </datalist>
                   </div>
                   <div>
-                    <label
-                      for="payee"
-                      class="block text-sm font-medium text-left text-gray-700 leading-5">
-                      Payee
-                    </label>
-                    <input
-                      type="text"
-                      id="payee"
-                      name="payee"
-                      class="block w-full form-input"
-                      placeholder="7Eleven"
-                    />
+                    <%= label f, :payee, class: "block text-sm font-medium text-left text-gray-700 leading-5" %>
+                    <%= text_input f, :payee, class: "block w-full form-input", placeholder: "7Eleven" %>
                   </div>
                 </div>
                 <div class="flex flex-col px-2">
                   <div>
-                    <label 
-                     for="amount"
-                     class="block text-sm font-medium text-left text-gray-700 leading-5">
-                      Amount
-                    </label>
+                    <%= label f, :amount, class: "block text-sm font-medium text-left text-gray-700 leading-5" %>
                     <div class="relative flex">
-                      <input 
-                       type="text" 
-                       inputmode="numeric" 
-                       pattern="[0-9]*"
-                       name="amount" 
-                       id="amount" 
-                       class="block w-full form-input"
-                       placeholder="R$10,58">
-                      <label for="toggle" class="absolute inset-y-0 right-0 flex items-center mr-2 cursor-pointer">
+                      <%= text_input f, :amount, class: "block w-full form-input", placeholder: "$10.58", inputmode: "numeric" %>
+                      <label for="transaction_form_toggle" class="absolute inset-y-0 right-0 flex items-center mr-2 cursor-pointer">
                         <div class="relative">
-                          <input type="checkbox" name="toggle" id="toggle" class="hidden">
+                          <%= checkbox f, :toggle, class: "hidden" %>
                           <div class="h-8 rounded shadow-inner toggle__line w-14"></div>
                           <div class="absolute inset-y-0 left-0 w-6 h-6 m-1 bg-white rounded shadow transform transition-transform ease-in duration-200 toggle__dot"></div>
                         </div>
@@ -75,32 +42,14 @@
                     </div>
                   </div>
                   <div>
-                    <label
-                      for="category"
-                      class="block text-sm font-medium text-left text-gray-700 leading-5">
-                      Category
-                    </label>
-                    <input
-                      id="category"
-                      name="category"
-                      class="block w-full form-input"
-                      placeholder="Groceries"
-                    />
+                    <%= label f, :category, class: "block text-sm font-medium text-left text-gray-700 leading-5" %>
+                    <%= text_input f, :category, class: "block w-full form-input", placeholder: "Groceries" %>
                   </div>
                 </div>
               </div>
               <div>
-                <label
-                  for="comment"
-                  class="block text-sm font-medium text-left text-gray-700 leading-5">
-                  Note
-                </label>
-                <input
-                  id="comment"
-                  name="comment"
-                  class="block w-full form-input"
-                  placeholder="Dinner ingredients"
-                />
+                <%= label f, :note, class: "block text-sm font-medium text-left text-gray-700 leading-5" %>
+                <%= text_input f, :note, class: "block w-full form-input", placeholder: "Dinner ingredients" %>
               </div>
             </div>
           </div>
@@ -109,17 +58,13 @@
       <div
         class="px-4 py-3 bg-gray-50 sm:px-6 sm:flex sm:flex-row-reverse">
         <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-          <button
-            type="button"
-            class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-green-600 border border-transparent rounded-md leading-6 shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">
-            Confirm
-          </button>
+          <%= submit "Confirm", class: "inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-green-600 border border-transparent rounded-md leading-6 hover:bg-green-500 focus:outline-none focus:shadow-outline focus:border-green-700 transition ease-in-out duration-150 sm:text-sm sm:leading-5" %>
         </span>
         <span
           class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto">
           <button
             type="button"
-            class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md leading-6 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+            class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md leading-6 shadow-sm hover:text-gray-500 focus:outline-none focus:shadow-outline transition ease-in-out duration-150 sm:text-sm sm:leading-5">
             Cancel
           </button>
         </span>
