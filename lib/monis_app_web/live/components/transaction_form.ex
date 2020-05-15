@@ -18,4 +18,9 @@ defmodule MonisAppWeb.TransactionForm do
     |> cast(attrs, [:amount, :note, :payee, :account, :category, :toggle])
     |> validate_required([:amount, :payee, :account, :category])
   end
+
+  def new() do
+    %__MODULE__{}
+    |> changeset(%{})
+  end
 end

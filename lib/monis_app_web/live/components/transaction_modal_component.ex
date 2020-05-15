@@ -6,7 +6,7 @@ defmodule MonisAppWeb.TransactionModalComponent do
   alias MonisAppWeb.TransactionForm
 
   def update(%{current_user: user} = assigns, socket) do
-    changeset = TransactionForm.changeset(%TransactionForm{}, %{})
+    changeset = TransactionForm.new()
 
     socket =
       socket
