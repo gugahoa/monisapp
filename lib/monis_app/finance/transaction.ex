@@ -7,6 +7,7 @@ defmodule MonisApp.Finance.Transaction do
     field :note, :string
     field :payee, :string
 
+    field :account_name, :string, virtual: true
     belongs_to :account, MonisApp.Finance.Account
     belongs_to :category, MonisApp.Finance.Category
 

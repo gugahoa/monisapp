@@ -8,6 +8,7 @@ defmodule MonisAppWeb.TransactionForm do
     field :note, :string
     field :payee, :string
 
+    field :account_id, :id
     field :account, :string
     field :category, :string
   end
