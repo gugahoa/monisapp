@@ -5,6 +5,18 @@
 /* This file is for your main application css. */
 @import "../node_modules/nprogress/nprogress.css";
 
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  @apply leading-normal !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+  @apply text-gray-500 !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  @apply hidden !important;
+}
+
 /* LiveView specific classes for your customizations */
 .invalid-feedback {
   color: #a94442;

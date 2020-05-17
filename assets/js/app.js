@@ -14,12 +14,45 @@ import "../css/app.scss"
 //
 import "alpinejs";
 import "phoenix_html"
+import $ from "jquery";
+import 'select2/dist/js/select2.full.js'
 import {Socket} from "phoenix"
 import NProgress from "nprogress"
 import {LiveSocket} from "phoenix_live_view"
 
+let Hooks = {}
+Hooks.SelectAccount = {
+
+  initSelect2() {
+    let hook = this,
+        $select = $(hook.el).find("select");
+    
+    $select.select2({
+      placeholder: {
+        id: -1,
+        text: "Account"
+      },
+      width: "100%",
+      containerCssClass: "pl-1 py-2 leading-normal border border-gray-300 block w-full h-10",
+      dropdownCssClass: "border-gray-300"
+    })
+    .on("select2:select", (e) => hook.selected(hook, e))
+    
+    return $select;
+  },
+
+  mounted() {
+    this.initSelect2();
+  },
+
+  selected(hook, event) {
+    let id = event.params.data.id;
+    hook.pushEvent("account_selected", {account_id: id})
+  }
+}
+
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
+let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {_csrf_token: csrfToken}})
 
 // Show progress bar on live navigation and form submits
 window.addEventListener("phx:page-loading-start", info => NProgress.start())

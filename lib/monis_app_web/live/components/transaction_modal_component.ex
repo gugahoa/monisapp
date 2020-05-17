@@ -12,7 +12,7 @@ defmodule MonisAppWeb.TransactionModalComponent do
     socket =
       socket
       |> assign(assigns)
-      |> assign(:accounts, Finance.list_accounts(user))
+      |> assign(:accounts, [%{id: -1, name: "Account"} | Finance.list_accounts(user)])
       |> assign(:changeset, changeset)
 
     {:ok, socket}
