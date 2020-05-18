@@ -46,7 +46,7 @@ defmodule MonisApp.Finance do
 
   """
   def create_default_categories(%User{} = user) do
-    Repo.transaction(fn -> 
+    Repo.transaction(fn ->
       default_categories()
       |> Stream.map(&Ecto.build_assoc(user, :categories, &1))
       |> Enum.map(&Repo.insert!/1)
