@@ -117,5 +117,5 @@ input:checked ~ .toggle__line {
 }
 
 input:checked ~ .toggle__dot {
-  @apply translate-x-full;
+  @apply translate-x-full !important;
 }
