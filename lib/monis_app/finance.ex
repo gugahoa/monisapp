@@ -10,6 +10,37 @@ defmodule MonisApp.Finance do
   alias MonisApp.Accounts.User
 
   @doc """
+  Returns a list of default categories.
+
+  ## Exampels
+
+      iex> default_categories()
+      [%Category{}, ...]
+
+  """
+  def default_categories do
+    categories = [
+      {"Income", "income"},
+      {"Groceries", "expense"},
+      {"Rent", "expense"},
+      {"Internet", "expense"},
+      {"Phone", "expense"},
+      {"Health", "expense"},
+      {"Dining Out", "expense"}
+    ]
+
+    categories
+    |> Stream.map(fn {name, type} ->
+      Category.changeset(%Category{}, %{name: name, type: type})
+    end)
+    |> Stream.map(&Ecto.Changeset.apply_action(&1, :validate))
+    |> Enum.map(fn
+      {:error, changeset} -> changeset
+      {:ok, category} -> category
+    end)
+  end
+
+  @doc """
   Returns the list of categories.
 
   ## Examples
