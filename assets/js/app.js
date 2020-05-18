@@ -35,7 +35,6 @@ Hooks.SelectAccount = {
       width: "100%",
       containerCssClass: "pl-1 py-2 leading-normal border border-gray-300 block w-full h-10 focus:outline-none focus:shadow-outline",
       dropdownCssClass: "border-gray-300",
-      dropdownParent: hook.el
     })
     .on("select2:select", (e) => hook.selected(hook, e))
     
