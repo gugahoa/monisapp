@@ -10,5 +10,13 @@ defmodule MonisApp.FinanceTest do
       categories = Finance.default_categories()
       Enum.map(categories, &assert %Category{} = &1)
     end
+
+    test "create_default_categories/1 creates the default categories for a given user" do
+      user = insert(:user)
+
+      default_categories = Finance.default_categories()
+      assert {:ok, categories} = Finance.create_default_categories(user)
+      assert length(default_categories) == length(categories)
+    end
   end
 end

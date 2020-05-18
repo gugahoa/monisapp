@@ -33,10 +33,23 @@ defmodule MonisApp.Finance do
     |> Stream.map(fn {name, type} ->
       Category.changeset(%Category{}, %{name: name, type: type})
     end)
-    |> Stream.map(&Ecto.Changeset.apply_action(&1, :validate))
-    |> Enum.map(fn
-      {:error, changeset} -> changeset
-      {:ok, category} -> category
+    |> Enum.map(&Ecto.Changeset.apply_action!(&1, :validate))
+  end
+
+  @doc """
+  Creates the default categories for a given user.
+
+  ## Examples
+
+      iex> create_default_categories(user)
+      [%Category{}, ...]
+
+  """
+  def create_default_categories(%User{} = user) do
+    Repo.transaction(fn -> 
+      default_categories()
+      |> Stream.map(&Ecto.build_assoc(user, :categories, &1))
+      |> Enum.map(&Repo.insert!/1)
     end)
   end
 
