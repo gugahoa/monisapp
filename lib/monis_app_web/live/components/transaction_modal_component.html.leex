@@ -42,9 +42,15 @@
                       </label>
                     </div>
                   </div>
-                  <div>
-                    <%= label f, :category, class: "block text-sm font-medium text-left text-gray-700 leading-5" %>
-                    <%= text_input f, :category_name, class: "block w-full form-input h-10", placeholder: "Groceries" %>
+                  <div class="relative">
+                    <label for="<%= input_id f, :category_id %>">
+                      <span class="block text-sm font-medium text-left text-gray-700 leading-5">
+                        Account
+                      </span>
+                      <div phx-hook="SelectCategory" phx-update="ignore" class="select-category-div">
+                        <%= select f, :category_id, Enum.map(@categories, &{&1.name, &1.id}), phx_throttle: 400 %>
+                      </div>
+                    </label>
                   </div>
                 </div>
               </div>
