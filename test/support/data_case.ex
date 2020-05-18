@@ -24,6 +24,7 @@ defmodule MonisApp.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import MonisApp.DataCase
+      import MonisApp.Factory
     end
   end
 

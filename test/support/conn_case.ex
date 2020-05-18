@@ -23,6 +23,7 @@ defmodule MonisAppWeb.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import MonisAppWeb.ConnCase
+      import MonisApp.Factory
 
       alias MonisAppWeb.Router.Helpers, as: Routes
 
