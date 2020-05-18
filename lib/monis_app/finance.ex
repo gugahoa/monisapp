@@ -130,18 +130,16 @@ defmodule MonisApp.Finance do
   @doc """
   Gets a single account.
 
-  Raises `Ecto.NoResultsError` if the Account does not exist.
-
   ## Examples
 
-      iex> get_account!(123)
+      iex> get_account(123)
       %Account{}
 
-      iex> get_account!(456)
-      ** (Ecto.NoResultsError)
+      iex> get_account(456)
+      nil
 
   """
-  def get_account!(id), do: Repo.get!(Account, id)
+  def get_account(%User{} = user, id), do: Repo.get_by(Account, id: id, user_id: user.id)
 
   @doc """
   Creates a account.

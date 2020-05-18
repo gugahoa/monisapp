@@ -5,7 +5,6 @@ defmodule MonisAppWeb.TransactionModalComponent do
   alias MonisApp.Finance
   alias MonisApp.Finance.Transaction
 
-  # TODO: Somehow make an autocomplete that doesn't look so bad, and retains at least a little bit of a11y
   def update(%{current_user: user} = assigns, socket) do
     changeset = Finance.change_transaction(%Transaction{})
 
@@ -18,29 +17,31 @@ defmodule MonisAppWeb.TransactionModalComponent do
     {:ok, socket}
   end
 
-  def handle_event(
-        "change-forms",
-        %{
-          "_target" => ["transaction", "account_name"],
-          "transaction" => %{"account_name" => search_term}
-        },
-        socket
-      ) do
-    socket =
-      socket
-      |> assign(:accounts, Finance.search_accounts(search_term))
-
-    {:noreply, socket}
-  end
-
-  def handle_event("change-forms", %{"_target" => target, "transaction" => transaction}, socket) do
-    IO.puts("#{inspect(target)}")
-
+  def handle_event("change-forms", %{"transaction" => transaction}, socket) do
     socket =
       socket
       |> assign(:changeset, Finance.change_transaction(%Transaction{}, transaction))
 
     {:noreply, socket}
+  end
+
+  def handle_event("account-selected", %{"account_id" => account_id}, socket) do
+    account = Finance.get_account(socket.assigns[:current_user], account_id)
+
+    IO.puts "#{inspect({account, account_id})}"
+    if account != nil do
+      data =
+        socket.assigns[:changeset].changes
+        |> Map.put(:account_id, account_id)
+
+      {:noreply, assign(socket, :changeset, Finance.change_transaction(%Transaction{}, data))}
+    else
+      data =
+        socket.assigns[:changeset].changes
+        |> Map.delete(:account_id)
+
+      {:noreply, assign(socket, :changeset, Finance.change_transaction(%Transaction{}, data))}
+    end
   end
 
   def handle_event("create-transaction", _, socket) do

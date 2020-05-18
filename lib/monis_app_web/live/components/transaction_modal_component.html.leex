@@ -18,7 +18,7 @@
                       <span class="block text-sm font-medium text-left text-gray-700 leading-5">
                         Account
                       </span>
-                      <div phx-hook="SelectAccount" phx-update="ignore">
+                      <div phx-hook="SelectAccount" phx-update="ignore" class="select-account-div">
                         <%= select f, :account_id, Enum.map(@accounts, &{&1.name, &1.id}), phx_throttle: 400 %>
                       </div>
                     </label>
@@ -32,7 +32,7 @@
                   <div>
                     <%= label f, :amount, class: "block text-sm font-medium text-left text-gray-700 leading-5" %>
                     <div class="relative flex">
-                      <%= text_input f, :amount, class: "block w-full form-input h-10", placeholder: "$10.58", inputmode: "numeric" %>
+                      <%= text_input f, :amount, class: "block w-full form-input h-10", placeholder: "10.58", inputmode: "numeric" %>
                       <label for="<%= input_id f, :toggle %>" class="absolute inset-y-0 right-0 flex items-center mr-2 cursor-pointer">
                         <div class="relative">
                           <%= checkbox f, :toggle, class: "hidden" %>

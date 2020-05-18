@@ -7,7 +7,6 @@ defmodule MonisApp.Finance.Transaction do
     field :note, :string
     field :payee, :string
 
-    field :account_name, :string, virtual: true
     belongs_to :account, MonisApp.Finance.Account
 
     field :category_name, :string, virtual: true
@@ -19,7 +18,7 @@ defmodule MonisApp.Finance.Transaction do
   @doc false
   def changeset(transaction, attrs) do
     transaction
-    |> cast(attrs, [:payee, :amount, :note, :account_name, :category_name])
-    |> validate_required([:payee, :amount, :note])
+    |> cast(attrs, [:payee, :amount, :note, :account_id, :category_id, :category_name])
+    |> validate_required([:payee, :amount, :category_id, :account_id])
   end
 end

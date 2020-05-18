@@ -33,7 +33,7 @@ Hooks.SelectAccount = {
         text: "Account"
       },
       width: "100%",
-      containerCssClass: "pl-1 py-2 leading-normal border border-gray-300 block w-full h-10",
+      containerCssClass: "pl-1 py-2 leading-normal border border-gray-300 block w-full h-10 focus:outline-none focus:shadow-outline",
       dropdownCssClass: "border-gray-300"
     })
     .on("select2:select", (e) => hook.selected(hook, e))
@@ -47,7 +47,7 @@ Hooks.SelectAccount = {
 
   selected(hook, event) {
     let id = event.params.data.id;
-    hook.pushEvent("account_selected", {account_id: id})
+    hook.pushEventTo(".select-account-div", "account-selected", {account_id: id})
   }
 }
 
