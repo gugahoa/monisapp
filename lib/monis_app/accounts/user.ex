@@ -23,6 +23,13 @@ defmodule MonisApp.Accounts.User do
     |> validate_password()
   end
 
+  @doc false
+  def password_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:password])
+    |> validate_password()
+  end
+
   defp validate_email(changeset) do
     changeset
     |> validate_required([:email])

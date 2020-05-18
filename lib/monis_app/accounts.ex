@@ -100,7 +100,20 @@ defmodule MonisApp.Accounts do
   end
 
   @doc """
-  Returns an `%Ecto.Changeset{}` for tracking user changes.
+  Returns an `%Ecto.Changeset{}` for tracking user changes to password.
+
+  ## Examples
+
+      iex> change_user_password(user)
+      %Ecto.Changeset{data: %User{}}
+
+  """
+  def change_user_password(%User{} = user, attrs \\ %{}) do
+    User.password_changeset(user, attrs)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking user changes to email and password.
 
   ## Examples
 
