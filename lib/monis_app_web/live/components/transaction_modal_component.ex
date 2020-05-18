@@ -62,7 +62,8 @@ defmodule MonisAppWeb.TransactionModalComponent do
     end
   end
 
-  def handle_event("create-transaction", _, socket) do
-    {:noreply, socket}
+  def handle_event("create-transaction", %{"transaction" => attrs}, socket) do
+    changeset = Transaction.form_changeset(socket.assigns[:changeset], attrs)
+    {:noreply, assign(socket, :changeset, changeset)}
   end
 end
