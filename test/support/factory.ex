@@ -16,4 +16,30 @@ defmodule MonisApp.Factory do
     |> Accounts.change_user_password(%{password: password, password_confirmation: password})
     |> Ecto.Changeset.apply_action!(:insert)
   end
+
+  alias MonisApp.Finance.{Transaction, Category, Account}
+
+  def account_factory() do
+    %Account{
+      name: sequence(:name, &"name-#{&1}"),
+      user: build(:user),
+      type: "checking",
+    }
+  end
+
+  def category_factory() do
+    %Category{
+      name: sequence(:name, &"name-#{&1}"),
+      type: "expense"
+    }
+  end
+
+  def transaction_factory() do
+    %Transaction{
+      payee: sequence(:payee, &"Payee #{&1}"),
+      note: "Some note",
+      account: build(:account),
+      category: build(:category)
+    }
+  end
 end

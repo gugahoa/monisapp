@@ -19,4 +19,24 @@ defmodule MonisApp.FinanceTest do
       assert length(default_categories) == length(categories)
     end
   end
+
+  describe "payees" do
+    alias MonisApp.Finance.Transaction
+
+    test "list_payees/1 returns all payees for a given user" do
+      user = insert(:user)
+      assert [] == Finance.list_payees(user)
+
+      account = insert(:account, user: user)
+      transaction = insert(:transaction, account: account, payee: "something")
+      assert ["something"] == Finance.list_payees(user)
+    end
+
+    test "list_payees/2 does not return payees from other users" do
+      user = insert(:user)
+      insert(:transaction)
+
+      assert [] == Finance.list_payees(user)
+    end
+  end
 end

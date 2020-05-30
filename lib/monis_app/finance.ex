@@ -252,6 +252,24 @@ defmodule MonisApp.Finance do
   end
 
   alias MonisApp.Finance.Transaction
+  alias MonisApp.Accounts.User
+
+  @doc """
+  Returns the list of all payees for a user's transactions
+
+  ## Examples
+  
+    iex> list_payees(user)
+    ["7Eleven", ...]
+  
+  """
+  def list_payees(%User{} = user) do
+    Transaction
+    |> join(:left, [t], a in assoc(t, :account))
+    |> where([t, a], a.user_id == ^user.id)
+    |> select([t], t.payee)
+    |> Repo.all
+  end
 
   @doc """
   Returns the list of transactions.
