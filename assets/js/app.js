@@ -79,6 +79,33 @@ Hooks.SelectCategory = {
     hook.pushEventTo(".select-category-div", "category-selected", {category_id: id})
   }
 }
+Hooks.SelectPayee = {
+
+  initSelect2() {
+    let hook = this,
+        $select = $(hook.el).find("select");
+    
+    $select.select2({
+      tags: true,
+      placeholder: "Payee",
+      width: "100%",
+      containerCssClass: "pl-1 py-2 leading-normal border border-gray-300 block w-full h-10 focus:outline-none focus:shadow-outline",
+      dropdownCssClass: "border-gray-300",
+    })
+    .on("select2:select", (e) => hook.selected(hook, e))
+    
+    return $select;
+  },
+
+  mounted() {
+    this.initSelect2();
+  },
+
+  selected(hook, event) {
+    let id = event.params.data.id;
+    hook.pushEventTo(".select-payee-div", "payee-selected", {payee: payee})
+  }
+}
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {_csrf_token: csrfToken}})

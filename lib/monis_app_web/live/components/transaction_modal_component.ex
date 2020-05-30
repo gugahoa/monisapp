@@ -11,8 +11,9 @@ defmodule MonisAppWeb.TransactionModalComponent do
     socket =
       socket
       |> assign(assigns)
-      |> assign(:categories, [%{id: -1, name: "Category"} | Finance.list_categories(user)])
-      |> assign(:accounts, [%{id: -1, name: "Account"} | Finance.list_accounts(user)])
+      |> assign(:categories, Finance.list_categories(user))
+      |> assign(:accounts, Finance.list_accounts(user))
+      |> assign(:payees, Finance.list_payees(user))
       |> assign(:changeset, changeset)
 
     {:ok, socket}
@@ -42,6 +43,14 @@ defmodule MonisAppWeb.TransactionModalComponent do
 
       {:noreply, assign(socket, :changeset, Finance.change_transaction(%Transaction{}, data))}
     end
+  end
+
+  def handle_event("payee-selected", %{"payee" => payee}, socket) do
+    data =
+      socket.assigns[:changeset].changes
+      |> Map.put(:payee, payee)
+
+    {:noreply, assign(socket, :changeset, Finance.change_transaction(%Transaction{}, data))}
   end
 
   def handle_event("account-selected", %{"account_id" => account_id}, socket) do

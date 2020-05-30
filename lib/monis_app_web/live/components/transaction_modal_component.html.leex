@@ -1,7 +1,10 @@
+<span>
+  <%= inspect(@changeset) %>
+</span>
 <div class="fixed inset-0 flex items-end px-4 pb-4 sm:items-center sm:justify-center">
   <div class="absolute inset-0 bg-gray-500 opacity-75" />
   </div>
-  <%= f= form_for @changeset, "#", [phx_target: @myself, phx_change: "change-forms", phx_submit: "create-transaction"] %>
+  <%= f= form_for @changeset, "#", [phx_target: @myself, phx_change: "change-forms", phx_submit: "create-transaction", class: "w-full sm:w-auto"] %>
     <div
       class="w-full overflow-hidden bg-white rounded-lg shadow-xl transform transition-all sm:max-w-lg">
       <div class="px-4 pt-5 pb-4 bg-white sm:p-6 sm:pb-4">
@@ -12,20 +15,26 @@
             </h3>
             <div class="flex flex-col mt-2">
               <div class="flex flex-col -mx-2 sm:flex-row">
-                <div class="flex flex-col px-2">
+                <div class="flex flex-col px-2 sm:w-1/2">
                   <div class="relative">
                     <label for="<%= input_id f, :account_id %>">
                       <span class="block text-sm font-medium text-left text-gray-700 leading-5">
                         Account
                       </span>
-                      <div phx-hook="SelectAccount" phx-update="ignore" class="select-account-div">
-                        <%= select f, :account_id, Enum.map(@accounts, &{&1.name, &1.id}), phx_throttle: 400 %>
+                      <div phx-hook="SelectAccount" phx-update="ignore" class="text-left select-account-div">
+                        <%= select f, :account_id, Enum.map([%{id: -1, name: "Account"} | @accounts], &{&1.name, &1.id}), phx_throttle: 400 %>
                       </div>
                     </label>
                   </div>
-                  <div>
-                    <%= label f, :payee, class: "block text-sm font-medium text-left text-gray-700 leading-5" %>
-                    <%= text_input f, :payee, class: "block w-full form-input h-10", placeholder: "7Eleven" %>
+                  <div class="relative">
+                    <label for="<%= input_id f, :payee %>">
+                      <span class="block text-sm font-medium text-left text-gray-700 leading-5">
+                        Payee
+                      </span>
+                      <div phx-hook="SelectPayee" phx-update="ignore" class="text-left select-payee-div">
+                        <%= select f, :payee, @payees, phx_throttle: 400 %>
+                      </div>
+                    </label>
                   </div>
                 </div>
                 <div class="flex flex-col px-2">
@@ -47,8 +56,8 @@
                       <span class="block text-sm font-medium text-left text-gray-700 leading-5">
                         Account
                       </span>
-                      <div phx-hook="SelectCategory" phx-update="ignore" class="select-category-div">
-                        <%= select f, :category_id, Enum.map(@categories, &{&1.name, &1.id}), phx_throttle: 400 %>
+                      <div phx-hook="SelectCategory" phx-update="ignore" class="text-left select-category-div">
+                        <%= select f, :category_id, Enum.map([%{id: -1, name: "Category"} | @categories], &{&1.name, &1.id}), phx_throttle: 400 %>
                       </div>
                     </label>
                   </div>
