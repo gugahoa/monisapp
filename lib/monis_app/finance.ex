@@ -267,6 +267,7 @@ defmodule MonisApp.Finance do
     Transaction
     |> join(:left, [t], a in assoc(t, :account))
     |> where([t, a], a.user_id == ^user.id)
+    |> distinct([t], t.payee)
     |> select([t], t.payee)
     |> Repo.all
   end
