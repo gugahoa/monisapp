@@ -10,6 +10,7 @@ defmodule MonisAppWeb.ErrorHelpers do
   """
   def error_tag(form, field, opts \\ []) do
     class = Keyword.get(opts, :class)
+
     Enum.map(Keyword.get_values(form.errors, field), fn error ->
       content_tag(:span, translate_error(error),
         class: if(class == nil, do: "invalid-feedback", else: "invalid-feedback #{class}"),

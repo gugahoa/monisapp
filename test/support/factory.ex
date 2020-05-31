@@ -23,7 +23,7 @@ defmodule MonisApp.Factory do
     %Account{
       name: sequence(:name, &"name-#{&1}"),
       user: build(:user),
-      type: "checking",
+      type: "checking"
     }
   end
 

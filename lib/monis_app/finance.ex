@@ -258,10 +258,10 @@ defmodule MonisApp.Finance do
   Returns the list of all payees for a user's transactions
 
   ## Examples
-  
+
     iex> list_payees(user)
     ["7Eleven", ...]
-  
+
   """
   def list_payees(%User{} = user) do
     Transaction
@@ -269,7 +269,7 @@ defmodule MonisApp.Finance do
     |> where([t, a], a.user_id == ^user.id)
     |> distinct([t], t.payee)
     |> select([t], t.payee)
-    |> Repo.all
+    |> Repo.all()
   end
 
   @doc """

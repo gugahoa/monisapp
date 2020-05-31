@@ -8,7 +8,7 @@ defmodule MonisApp.FinanceTest do
 
     test "default_categories/0 returns list of default categories with no errors" do
       categories = Finance.default_categories()
-      Enum.map(categories, &assert %Category{} = &1)
+      Enum.map(categories, &assert(%Category{} = &1))
     end
 
     test "create_default_categories/1 creates the default categories for a given user" do
