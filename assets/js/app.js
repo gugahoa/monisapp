@@ -102,7 +102,7 @@ Hooks.SelectPayee = {
   },
 
   selected(hook, event) {
-    let id = event.params.data.id;
+    let payee = event.params.data.id;
     hook.pushEventTo(".select-payee-div", "payee-selected", {payee: payee})
   }
 }
