@@ -32,7 +32,17 @@
                         Payee
                       </span>
                       <div phx-hook="SelectPayee" phx-update="ignore" class="text-left select-payee-div">
-                        <%= select f, :payee, @payees, phx_throttle: 400 %>
+                        <%= 
+                        select(
+                          f,
+                          :payee,
+                          Enum.map([%{id: -1, name: "Payee"} | @payees], fn 
+                            %{id: -1} -> {"Payee", -1}
+                            payee -> {payee, payee}
+                          end),
+                          phx_throttle: 400
+                        )
+                        %>
                       </div>
                     </label>
                   </div>
