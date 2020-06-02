@@ -1,7 +1,7 @@
 // We need to import the CSS so that webpack will load it.
 // The MiniCssExtractPlugin is used to separate it out into
 // its own CSS file.
-import "../css/app.scss"
+import "../css/app.scss";
 
 // webpack automatically bundles all modules in your
 // entry points. Those entry points can be configured
@@ -13,31 +13,32 @@ import "../css/app.scss"
 //     import socket from "./socket"
 //
 import "alpinejs";
-import "phoenix_html"
+import "phoenix_html";
 import $ from "jquery";
-import 'select2/dist/js/select2.full.js'
-import {Socket} from "phoenix"
-import NProgress from "nprogress"
-import {LiveSocket} from "phoenix_live_view"
+import "select2/dist/js/select2.full.js";
+import { Socket } from "phoenix";
+import NProgress from "nprogress";
+import { LiveSocket } from "phoenix_live_view";
 
-let Hooks = {}
+let Hooks = {};
 Hooks.SelectAccount = {
-
   initSelect2() {
     let hook = this,
-        $select = $(hook.el).find("select");
-    
-    $select.select2({
-      placeholder: {
-        id: -1,
-        text: "Account"
-      },
-      width: "100%",
-      containerCssClass: "pl-1 py-2 leading-normal border border-gray-300 block w-full h-10 focus:outline-none focus:shadow-outline",
-      dropdownCssClass: "border-gray-300",
-    })
-    .on("select2:select", (e) => hook.selected(hook, e))
-    
+      $select = $(hook.el).find("select");
+
+    $select
+      .select2({
+        placeholder: {
+          id: -1,
+          text: "Account",
+        },
+        width: "100%",
+        containerCssClass:
+          "pl-1 py-2 leading-normal border border-gray-300 block w-full h-10 focus:outline-none focus:shadow-outline",
+        dropdownCssClass: "border-gray-300",
+      })
+      .on("select2:select", (e) => hook.selected(hook, e));
+
     return $select;
   },
 
@@ -47,26 +48,29 @@ Hooks.SelectAccount = {
 
   selected(hook, event) {
     let id = event.params.data.id;
-    hook.pushEventTo(".select-account-div", "account-selected", {account_id: id})
-  }
-}
+    hook.pushEventTo(".select-account-div", "account-selected", {
+      account_id: id,
+    });
+  },
+};
 Hooks.SelectCategory = {
-
   initSelect2() {
     let hook = this,
-        $select = $(hook.el).find("select");
-    
-    $select.select2({
-      placeholder: {
-        id: -1,
-        text: "Category"
-      },
-      width: "100%",
-      containerCssClass: "pl-1 py-2 leading-normal border border-gray-300 block w-full h-10 focus:outline-none focus:shadow-outline",
-      dropdownCssClass: "border-gray-300",
-    })
-    .on("select2:select", (e) => hook.selected(hook, e))
-    
+      $select = $(hook.el).find("select");
+
+    $select
+      .select2({
+        placeholder: {
+          id: -1,
+          text: "Category",
+        },
+        width: "100%",
+        containerCssClass:
+          "pl-1 py-2 leading-normal border border-gray-300 block w-full h-10 focus:outline-none focus:shadow-outline",
+        dropdownCssClass: "border-gray-300",
+      })
+      .on("select2:select", (e) => hook.selected(hook, e));
+
     return $select;
   },
 
@@ -76,27 +80,30 @@ Hooks.SelectCategory = {
 
   selected(hook, event) {
     let id = event.params.data.id;
-    hook.pushEventTo(".select-category-div", "category-selected", {category_id: id})
-  }
-}
+    hook.pushEventTo(".select-category-div", "category-selected", {
+      category_id: id,
+    });
+  },
+};
 Hooks.SelectPayee = {
-
   initSelect2() {
     let hook = this,
-        $select = $(hook.el).find("select");
-    
-    $select.select2({
-      tags: true,
-      placeholder: {
-        id: -1,
-        text: "Payee"
-      },
-      width: "100%",
-      containerCssClass: "pl-1 py-2 leading-normal border border-gray-300 block w-full h-10 focus:outline-none focus:shadow-outline",
-      dropdownCssClass: "border-gray-300",
-    })
-    .on("select2:select", (e) => hook.selected(hook, e))
-    
+      $select = $(hook.el).find("select");
+
+    $select
+      .select2({
+        tags: true,
+        placeholder: {
+          id: -1,
+          text: "Payee",
+        },
+        width: "100%",
+        containerCssClass:
+          "pl-1 py-2 leading-normal border border-gray-300 block w-full h-10 focus:outline-none focus:shadow-outline",
+        dropdownCssClass: "border-gray-300",
+      })
+      .on("select2:select", (e) => hook.selected(hook, e));
+
     return $select;
   },
 
@@ -106,21 +113,33 @@ Hooks.SelectPayee = {
 
   selected(hook, event) {
     let payee = event.params.data.id;
-    hook.pushEventTo(".select-payee-div", "payee-selected", {payee: payee})
-  }
-}
+    hook.pushEventTo(".select-payee-div", "payee-selected", { payee: payee });
+  },
+};
 
-let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {_csrf_token: csrfToken}})
+let csrfToken = document
+  .querySelector("meta[name='csrf-token']")
+  .getAttribute("content");
+let liveSocket = new LiveSocket("/live", Socket, {
+  dom: {
+    onBeforeElUpdated(from, to) {
+      if (from.__x) {
+        window.Alpine.clone(from.__x, to);
+      }
+    },
+  },
+  hooks: Hooks,
+  params: { _csrf_token: csrfToken },
+});
 
 // Show progress bar on live navigation and form submits
-window.addEventListener("phx:page-loading-start", info => NProgress.start())
-window.addEventListener("phx:page-loading-stop", info => NProgress.done())
+window.addEventListener("phx:page-loading-start", (info) => NProgress.start());
+window.addEventListener("phx:page-loading-stop", (info) => NProgress.done());
 
 // connect if there are any LiveViews on the page
-liveSocket.connect()
+liveSocket.connect();
 
 // expose liveSocket on window for web console debug logs and latency simulation:
 // >> liveSocket.enableDebug()
 // >> liveSocket.enableLatencySim(1000)
-window.liveSocket = liveSocket
+window.liveSocket = liveSocket;
