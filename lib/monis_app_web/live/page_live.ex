@@ -11,7 +11,16 @@ defmodule MonisAppWeb.PageLive do
       |> assign_new(:current_user, fn ->
         Accounts.get_user_by_session_token(token)
       end)
+      |> assign(:open_modal, true)
 
     {:ok, socket}
+  end
+
+  def handle_event("open-modal", _, socket) do
+    {:noreply, assign(socket, :open_modal, true)}
+  end
+
+  def handle_event("close-modal", _, socket) do
+    {:noreply, assign(socket, :open_modal, false)}
   end
 end
