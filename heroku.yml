@@ -1,0 +1,15 @@
+setup:
+  addons:
+    - plan: heroku-postgresql
+  config:
+    PORT: 80
+build:
+  docker:
+    web: Dockerfile
+    release:
+       dockerfile: Dockerfile
+       target: runner
+release:
+  image: release
+  command:
+   - /app/bin/monis_app eval 'MonisApp.ReleaseTasks.migrate()'

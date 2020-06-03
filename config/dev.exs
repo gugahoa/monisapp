@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 # Configure your database
 config :monis_app, MonisApp.Repo,
