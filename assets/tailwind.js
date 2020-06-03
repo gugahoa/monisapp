@@ -2,7 +2,7 @@ module.exports = {
   purge: [],
   target: 'relaxed',
   prefix: '',
-  important: true,
+  important: false,
   separator: ':',
   theme: {
     screens: {

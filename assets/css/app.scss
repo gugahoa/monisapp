@@ -17,6 +17,18 @@
   @apply hidden !important;
 }
 
+.select2-custom-container-css {
+  @apply pl-1 py-2 leading-normal border border-gray-300 block w-full h-10 !important;
+}
+
+.select2-custom-container-css:focus {
+  @apply outline-none shadow-outline !important;
+}
+
+.border-gray-300-important {
+  @apply border-gray-300 !important;
+}
+
 /* LiveView specific classes for your customizations */
 .invalid-feedback {
   color: #a94442;
