@@ -1,13 +1,35 @@
 <main role="main" class="relative">
-  <div class="absolute w-full">
-    <p class="m-4 alert alert-info" role="alert"
+  <div class="absolute inset-x-0 z-10 max-w-3xl p-4 mx-auto"
+       x-data="{ show_info: <%= live_flash(@flash, :info) != nil %>, show_error: <%= live_flash(@flash, :error) != nil %> }"
+       >
+    <div
+      class="flex items-center p-4 font-semibold text-green-700 bg-green-200 rounded-lg"
+      x-show="show_info"
       phx-click="lv:clear-flash"
-      phx-value-key="info"><%= live_flash(@flash, :info) %></p>
-
-    <p class="m-4 alert alert-danger" role="alert"
+      phx-key-value="info"
+    >
+      <span class="flex items-center justify-center w-5 h-5 bg-green-700 rounded-full">
+        <svg viewBox="0 0 20 20" class="inline-block w-3 h-3 text-green-200 rounded-full fill-current">
+          <g id="Page-1" stroke="none" stroke-width="1">
+            <g id="icon-shape">
+              <polygon id="Path-126" points="0 11 2 9 7 14 18 3 20 5 7 18"></polygon>
+            </g>
+          </g>
+        </svg>
+      </span>
+      <p class="ml-4"><%= live_flash(@flash, :info) %></p>
+    </div>
+    <div
+      class="flex items-center p-4 font-semibold text-red-700 bg-red-100 rounded-lg"
+      x-show="show_error"
       phx-click="lv:clear-flash"
-      phx-value-key="error"><%= live_flash(@flash, :error) %></p>
+      phx-key-value="error"
+    >
+      <span class="flex items-center justify-center w-5 h-5 bg-red-500 rounded-full">
+        <svg viewBox="0 0 24 24" class="inline-block w-5 h-5 text-red-200 rounded-full fill-current"><path class="heroicon-ui" d="M16.24 14.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 0 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12l2.83 2.83z"/></svg>
+      </span>
+      <p class="ml-4"><%= live_flash(@flash, :error) %></p>
+    </div>
   </div>
-
   <%= @inner_content %>
 </main>
