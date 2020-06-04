@@ -83,7 +83,7 @@
                   <div class="relative">
                     <label for="<%= input_id f, :category_id %>">
                       <span class="block text-sm font-medium text-left text-gray-700 leading-5">
-                        Account
+                        Category
                       </span>
                       <div phx-hook="SelectCategory" phx-update="ignore" class="text-left select-category-div">
                         <%= select f, :category_id, Enum.map([%{id: -1, name: "Category"} | @categories], &{&1.name, &1.id}), phx_throttle: 400 %>
