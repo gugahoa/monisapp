@@ -27,13 +27,19 @@ defmodule MonisAppWeb.UserRegistrationControllerTest do
           "user" => %{"email" => email, "password" => valid_user_password()}
         })
 
-      assert get_session(conn, :user_token)
+      user_token = get_session(conn, :user_token)
+      assert user_token
       assert redirected_to(conn) =~ "/"
 
       # Now do a logged in request and assert on the menu
       conn = get(conn, "/")
       response = html_response(conn, 200)
       assert response =~ "Logout</a>"
+
+      user = MonisApp.Accounts.get_user_by_session_token(user_token)
+
+      assert length(MonisApp.Finance.list_categories(user)) ==
+               length(MonisApp.Finance.default_categories())
     end
 
     test "render errors for invalid data", %{conn: conn} do

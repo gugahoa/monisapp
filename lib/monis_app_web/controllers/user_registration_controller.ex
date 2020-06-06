@@ -15,6 +15,8 @@ defmodule MonisAppWeb.UserRegistrationController do
   def create(conn, %{"user" => user_params}) do
     case Accounts.register_user(user_params) do
       {:ok, user} ->
+        MonisApp.Finance.create_default_categories(user)
+
         conn
         |> put_flash(:info, "User created successfully.")
         |> UserAuth.login_user(user)
