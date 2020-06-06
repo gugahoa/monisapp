@@ -4,6 +4,9 @@ defmodule MonisApp.Factory do
   alias MonisApp.Accounts
   alias MonisApp.Accounts.User
 
+  def unique_user_email, do: "user#{System.unique_integer()}@example.com"
+  def valid_user_password, do: "hello world!"
+
   def user_factory() do
     %User{
       email: sequence(:email, &"email-#{&1}@example.com"),
