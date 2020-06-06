@@ -17,6 +17,11 @@
 
       <%= submit "Registre-se", class: "mt-4 bg-blue-700 h-12 text-white rounded hover:bg-blue-600" %>
     <% end %>
+
+    <p class="self-center mt-4 text-sm text-gray-700">
+      <span>Já possui conta? </span>
+      <%= link "Faça login", to: Routes.user_session_path(@conn, :new), class: "text-blue-700 cursor-pointer hover:text-blue-400" %>
+    </p>
   </div>
 </div>
 

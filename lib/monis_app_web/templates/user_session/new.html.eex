@@ -22,10 +22,9 @@
       <%= submit "Login", class: "bg-blue-700 h-12 text-white rounded hover:bg-blue-600" %>
     <% end %>
 
-    <a 
-      href="<%= Routes.user_registration_path(@conn, :new) %>"
-      class="self-center mt-4 text-sm text-gray-700 cursor-pointer hover:text-black">
-      Não possui conta? Cadastre-se
-    </a>
+    <p class="self-center mt-4 text-sm text-gray-700">
+      <span>Não possui conta? </span>
+      <%= link "Cadastre-se", to: Routes.user_registration_path(@conn, :new), class: "text-blue-700 cursor-pointer hover:text-blue-400" %>
+    </p>
   </div>
 </div>
