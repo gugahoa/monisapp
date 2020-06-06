@@ -3,7 +3,7 @@
        x-data="{ show_info: <%= live_flash(@flash, :info) != nil %>, show_error: <%= live_flash(@flash, :error) != nil %> }"
        >
     <div
-      class="flex items-center p-4 font-semibold text-green-700 bg-green-200 rounded-lg"
+      class="flex items-center p-4 font-semibold text-green-700 bg-green-200 rounded-lg shadow-md"
       x-show="show_info"
       phx-click="lv:clear-flash"
       phx-key-value="info"
@@ -20,7 +20,7 @@
       <p class="ml-4"><%= live_flash(@flash, :info) %></p>
     </div>
     <div
-      class="flex items-center p-4 font-semibold text-red-700 bg-red-100 rounded-lg"
+      class="flex items-center p-4 font-semibold text-red-700 bg-red-100 rounded-lg shadow-md"
       x-show="show_error"
       phx-click="lv:clear-flash"
       phx-key-value="error"
