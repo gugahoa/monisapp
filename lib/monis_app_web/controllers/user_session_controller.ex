@@ -17,4 +17,10 @@ defmodule MonisAppWeb.UserSessionController do
       render(conn, "new.html", error_message: "Invalid email and password combination")
     end
   end
+
+  def delete(conn, _params) do
+    conn
+    |> put_flash(:info, "Logged out successfully.")
+    |> UserAuth.logout_user()
+  end
 end

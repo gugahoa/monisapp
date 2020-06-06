@@ -20,6 +20,7 @@ defmodule MonisAppWeb.Router do
     post "/login", UserSessionController, :create
     get "/register", UserRegistrationController, :new
     post "/register", UserRegistrationController, :create
+    delete "/register", UserRegistrationController, :delete
   end
 
   scope "/", MonisAppWeb do
