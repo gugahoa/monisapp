@@ -138,8 +138,14 @@ defmodule MonisApp.Accounts do
 
   @doc """
   Generates a session token.
+
+  ## Examples
+
+      iex> generate_user_session_token(user)
+      %UserToken{}
+
   """
-  def generate_session_token(user) do
+  def generate_user_session_token(user) do
     {token, user_token} = UserToken.build_session_token(user)
     Repo.insert!(user_token)
     token

@@ -11,7 +11,7 @@ defmodule MonisAppWeb.UserAuth do
   @remember_me_options [sign: true, max_age: @max_age]
 
   def login_user(conn, user, user_params \\ %{}) do
-    token = Accounts.generate_session_token(user)
+    token = Accounts.generate_user_session_token(user)
     user_return_to = get_session(conn, :user_return_to)
 
     conn
