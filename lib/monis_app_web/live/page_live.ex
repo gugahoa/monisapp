@@ -3,15 +3,13 @@ defmodule MonisAppWeb.PageLive do
 
   alias MonisApp.Accounts
 
-  def mount(_params, %{"user_token" => token} = session, socket) do
-    IO.puts("MonisAppWeb.PageLive: mount/3 #{inspect({session, socket.assigns})}")
-
+  def mount(_params, %{"user_token" => token}, socket) do
     socket =
       socket
       |> assign_new(:current_user, fn ->
         Accounts.get_user_by_session_token(token)
       end)
-      |> assign(:open_modal, true)
+      |> assign(:open_modal, false)
 
     {:ok, socket}
   end
