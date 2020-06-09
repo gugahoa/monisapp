@@ -1,10 +1,12 @@
 <div class="relative">
   <p class="text-white">Hello, world!</p>
-  <%= live_component @socket,
-                     MonisAppWeb.TransactionModalComponent,
-                     id: 1,
-                     current_user: @current_user,
-                     open: @open_modal %>
+  <%= if @open_modal do %>
+    <%= live_component @socket,
+                       MonisAppWeb.TransactionModalComponent,
+                       id: 1,
+                       current_user: @current_user,
+                       open: @open_modal %>
+  <% end %>
 
-  <button phx-click="open-modal">Open Modal</button>
+  <button id="open-transaction-modal" phx-click="open-modal">Open Modal</button>
 </div>

@@ -26,7 +26,7 @@ defmodule MonisAppWeb.Router do
   scope "/", MonisAppWeb do
     pipe_through [:browser, :require_authenticated_user]
 
-    live "/", PageLive, :index
+    live "/", PageLive
   end
 
   scope "/", MonisAppWeb do

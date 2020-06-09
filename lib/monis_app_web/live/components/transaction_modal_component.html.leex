@@ -1,4 +1,9 @@
-<div class="fixed inset-x-0 bottom-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center" x-data="{ open: <%= @open %> }" x-show="open">
+<div 
+  id="add-transaction-modal"
+  class="fixed inset-x-0 bottom-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center" 
+  x-data="{ open: false }" 
+  x-init="$nextTick(() => {open = true})"
+  x-show="open">
   <div 
     class="fixed inset-0 transition-opacity" 
     x-show="open" 
@@ -40,7 +45,7 @@
                       <span class="block text-sm font-medium text-left text-gray-700 leading-5">
                         Account
                       </span>
-                      <div phx-hook="SelectAccount" phx-update="ignore" class="text-left select-account-div">
+                      <div id="select-account" phx-hook="SelectAccount" phx-update="ignore" class="text-left select-account-div">
                         <%= select f, :account_id, Enum.map([%{id: -1, name: "Account"} | @accounts], &{&1.name, &1.id}), phx_throttle: 400 %>
                       </div>
                     </label>
@@ -50,7 +55,7 @@
                       <span class="block text-sm font-medium text-left text-gray-700 leading-5">
                         Payee
                       </span>
-                      <div phx-hook="SelectPayee" phx-update="ignore" class="text-left select-payee-div">
+                      <div id="select-payee" phx-hook="SelectPayee" phx-update="ignore" class="text-left select-payee-div">
                         <%= 
                         select(
                           f,
@@ -85,7 +90,7 @@
                       <span class="block text-sm font-medium text-left text-gray-700 leading-5">
                         Category
                       </span>
-                      <div phx-hook="SelectCategory" phx-update="ignore" class="text-left select-category-div">
+                      <div id="select-category" phx-hook="SelectCategory" phx-update="ignore" class="text-left select-category-div">
                         <%= select f, :category_id, Enum.map([%{id: -1, name: "Category"} | @categories], &{&1.name, &1.id}), phx_throttle: 400 %>
                       </div>
                     </label>
