@@ -21,8 +21,6 @@ defmodule MonisApp.FinanceTest do
   end
 
   describe "payees" do
-    alias MonisApp.Finance.Transaction
-
     test "list_payees/1 returns all distinct payees for a given user" do
       user = insert(:user)
       assert [] == Finance.list_payees(user)
