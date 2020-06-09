@@ -34,7 +34,7 @@ defmodule MonisAppWeb.UserRegistrationControllerTest do
       # Now do a logged in request and assert on the menu
       conn = get(conn, "/")
       response = html_response(conn, 200)
-      assert response =~ "Logout</a>"
+      assert response =~ "Logout</button>"
 
       user = MonisApp.Accounts.get_user_by_session_token(user_token)
 
