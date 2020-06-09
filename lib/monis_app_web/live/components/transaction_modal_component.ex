@@ -75,12 +75,10 @@ defmodule MonisAppWeb.TransactionModalComponent do
 
     case Finance.create_transaction(user, attrs) do
       {:ok, _transaction} ->
-        changeset = Finance.change_transaction(user, %Transaction{}, %{})
-
         socket =
           socket
           |> put_flash(:info, "Transaction successfully created!")
-          |> assign(:changeset, changeset)
+          |> push_redirect(to: Routes.live_path(socket, MonisAppWeb.PageLive))
 
         {:noreply, socket}
 
