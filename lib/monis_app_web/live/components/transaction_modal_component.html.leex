@@ -1,3 +1,4 @@
+<%= inspect(@changeset) %>
 <div 
   id="add-transaction-modal"
   class="fixed inset-x-0 bottom-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center" 
@@ -75,7 +76,7 @@
                   <div>
                     <%= label f, :amount, class: "block text-sm font-medium text-left text-gray-700 leading-5" %>
                     <div class="relative flex">
-                      <%= text_input f, :amount, class: "block w-full form-input h-10", placeholder: "10.58", inputmode: "numeric" %>
+                      <%= text_input f, :amount, class: "block w-full form-input h-10", placeholder: "10.58", inputmode: "numeric", required: true %>
                       <label for="<%= input_id f, :toggle %>" class="absolute inset-y-0 right-0 flex items-center mr-2 cursor-pointer">
                         <div class="relative">
                           <%= checkbox f, :toggle, class: "hidden" %>
@@ -91,7 +92,11 @@
                         Category
                       </span>
                       <div id="select-category" phx-hook="SelectCategory" phx-update="ignore" class="text-left select-category-div">
-                        <%= select f, :category_id, Enum.map([%{id: -1, name: "Category"} | @categories], &{&1.name, &1.id}), phx_throttle: 400 %>
+                        <%= select f,
+                                   :category_id,
+                                   Enum.map([%{id: -1, name: "Category"} | @categories], &{&1.name, &1.id}),
+                                   phx_throttle: 400,
+                                   required: true %>
                       </div>
                     </label>
                   </div>

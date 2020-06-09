@@ -306,16 +306,16 @@ defmodule MonisApp.Finance do
 
   ## Examples
 
-      iex> create_transaction(%{field: value})
+      iex> create_transaction(user, %{field: value})
       {:ok, %Transaction{}}
 
-      iex> create_transaction(%{field: bad_value})
+      iex> create_transaction(user, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_transaction(attrs \\ %{}) do
+  def create_transaction(%User{} = user, attrs \\ %{}) do
     %Transaction{}
-    |> Transaction.changeset(attrs)
+    |> Transaction.changeset(user, attrs)
     |> Repo.insert()
   end
 
@@ -324,16 +324,16 @@ defmodule MonisApp.Finance do
 
   ## Examples
 
-      iex> update_transaction(transaction, %{field: new_value})
+      iex> update_transaction(user, transaction, %{field: new_value})
       {:ok, %Transaction{}}
 
-      iex> update_transaction(transaction, %{field: bad_value})
+      iex> update_transaction(user, transaction, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_transaction(%Transaction{} = transaction, attrs) do
+  def update_transaction(%User{} = user, %Transaction{} = transaction, attrs) do
     transaction
-    |> Transaction.changeset(attrs)
+    |> Transaction.changeset(user, attrs)
     |> Repo.update()
   end
 
@@ -358,11 +358,11 @@ defmodule MonisApp.Finance do
 
   ## Examples
 
-      iex> change_transaction(transaction)
+      iex> change_transaction(user, transaction)
       %Ecto.Changeset{data: %Transaction{}}
 
   """
-  def change_transaction(%Transaction{} = transaction, attrs \\ %{}) do
-    Transaction.changeset(transaction, attrs)
+  def change_transaction(%User{} = user, %Transaction{} = transaction, attrs \\ %{}) do
+    Transaction.changeset(transaction, user, attrs)
   end
 end

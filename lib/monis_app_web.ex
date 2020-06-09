@@ -46,6 +46,8 @@ defmodule MonisAppWeb do
       use Phoenix.LiveView,
         layout: {MonisAppWeb.LayoutView, "live.html"}
 
+      import MonisAppWeb.ErrorHelpers
+
       unquote(view_helpers())
     end
   end
@@ -53,6 +55,9 @@ defmodule MonisAppWeb do
   def live_component do
     quote do
       use Phoenix.LiveComponent
+
+      import MonisAppWeb.ErrorHelpers
+      use Phoenix.HTML
 
       unquote(view_helpers())
     end

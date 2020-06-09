@@ -1,12 +1,11 @@
 defmodule MonisAppWeb.TransactionModalComponent do
-  use Phoenix.LiveComponent
-  use Phoenix.HTML
+  use MonisAppWeb, :live_component
 
   alias MonisApp.Finance
   alias MonisApp.Finance.Transaction
 
   def update(%{current_user: user} = assigns, socket) do
-    changeset = Finance.change_transaction(%Transaction{})
+    changeset = Finance.change_transaction(user, %Transaction{})
 
     socket =
       socket
@@ -20,61 +19,63 @@ defmodule MonisAppWeb.TransactionModalComponent do
   end
 
   def handle_event("change-forms", %{"transaction" => transaction}, socket) do
+    user = socket.assigns[:current_user]
+
     socket =
       socket
-      |> assign(:changeset, Finance.change_transaction(%Transaction{}, transaction))
+      |> assign(:changeset, Finance.change_transaction(user, %Transaction{}, transaction))
 
     {:noreply, socket}
   end
 
   def handle_event("category-selected", %{"category_id" => id}, socket) do
-    category = Finance.get_category(socket.assigns[:current_user], id)
+    user = socket.assigns[:current_user]
+    category = Finance.get_category(user, id)
 
-    if category != nil do
-      data =
+    data =
+      if category != nil do
         socket.assigns[:changeset].changes
         |> Map.put(:category_id, id)
-
-      {:noreply, assign(socket, :changeset, Finance.change_transaction(%Transaction{}, data))}
-    else
-      data =
+      else
         socket.assigns[:changeset].changes
         |> Map.delete(:category_id)
+      end
 
-      {:noreply, assign(socket, :changeset, Finance.change_transaction(%Transaction{}, data))}
-    end
+    {:noreply, assign(socket, :changeset, Finance.change_transaction(user, %Transaction{}, data))}
   end
 
   def handle_event("payee-selected", %{"payee" => payee}, socket) do
+    user = socket.assigns[:current_user]
+
     data =
       socket.assigns[:changeset].changes
       |> Map.put(:payee, payee)
 
-    {:noreply, assign(socket, :changeset, Finance.change_transaction(%Transaction{}, data))}
+    {:noreply, assign(socket, :changeset, Finance.change_transaction(user, %Transaction{}, data))}
   end
 
   def handle_event("account-selected", %{"account_id" => account_id}, socket) do
-    account = Finance.get_account(socket.assigns[:current_user], account_id)
+    user = socket.assigns[:current_user]
+    account = Finance.get_account(user, account_id)
 
-    if account != nil do
-      data =
+    data =
+      if account != nil do
         socket.assigns[:changeset].changes
         |> Map.put(:account_id, account_id)
-
-      {:noreply, assign(socket, :changeset, Finance.change_transaction(%Transaction{}, data))}
-    else
-      data =
+      else
         socket.assigns[:changeset].changes
         |> Map.delete(:account_id)
+      end
 
-      {:noreply, assign(socket, :changeset, Finance.change_transaction(%Transaction{}, data))}
-    end
+    {:noreply, assign(socket, :changeset, Finance.change_transaction(user, %Transaction{}, data))}
   end
 
   def handle_event("create-transaction", %{"transaction" => attrs}, socket) do
-    case Finance.create_transaction(attrs) do
+    user = socket.assigns[:current_user]
+
+    case Finance.create_transaction(user, attrs) do
       {:ok, _transaction} ->
-        changeset = Finance.change_transaction(%Transaction{}, %{})
+        changeset = Finance.change_transaction(user, %Transaction{}, %{})
 
         socket =
           socket
