@@ -92,7 +92,7 @@ Hooks.SelectPayee = {
       .select2({
         tags: true,
         placeholder: {
-          id: -1,
+          id: "Payee",
           text: "Payee",
         },
         width: "100%",

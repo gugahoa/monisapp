@@ -8,11 +8,13 @@ defmodule MonisAppWeb.TransactionModalComponentTest do
   test "open-modal event opens add transaction modal component", %{conn: conn} do
     {:ok, view, html} = live(conn, Routes.live_path(conn, MonisAppWeb.PageLive))
 
-    refute html =~ "Add transaction"
+    assert html =~ "open_transaction_modal: false"
 
     assert view
            |> element("#open-transaction-modal")
            |> render_click() =~ "Add transaction"
+
+    assert render(view) =~ "open_transaction_modal: true"
   end
 
   test "form correctly creates transaction", %{conn: conn, user: user} do
@@ -25,22 +27,23 @@ defmodule MonisAppWeb.TransactionModalComponentTest do
            |> element("#open-transaction-modal")
            |> render_click() =~ "Add transaction"
 
-    assert {:ok, _view, html} =
+    assert {:ok, view, html} =
              view
-             |> element("form[phx-submit='create-transaction']")
-             |> render_submit(%{
+             |> form("form[phx-submit='create-transaction']", %{
                transaction: %{
                  account_id: account.id,
                  category_id: category.id,
-                 payee: "Example payee",
+                 payee: "Payee",
                  note: "Example note",
                  amount: 15
                }
              })
+             |> render_submit()
              |> follow_redirect(conn, Routes.live_path(conn, MonisAppWeb.PageLive))
 
     assert html =~ "successfully created"
-    refute html =~ "Add transaction"
+
+    assert render(view) =~ "open_transaction_modal: false"
 
     assert MonisApp.Finance.list_transactions() != []
   end
