@@ -71,6 +71,7 @@ defmodule MonisAppWeb.TransactionModalComponentTest do
                  category_id: category.id,
                  payee: "Payee",
                  note: "Example note",
+                 toggle: false,
                  amount: 15
                }
              })

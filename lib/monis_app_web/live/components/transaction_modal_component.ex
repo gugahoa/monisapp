@@ -73,7 +73,7 @@ defmodule MonisAppWeb.TransactionModalComponent do
   def handle_event("create-transaction", %{"transaction" => attrs}, socket) do
     user = socket.assigns[:current_user]
 
-    case Finance.create_transaction(user, attrs) do
+    case Finance.create_transaction(user, toggle_amount_signal(attrs)) do
       {:ok, _transaction} ->
         socket =
           socket
@@ -85,5 +85,14 @@ defmodule MonisAppWeb.TransactionModalComponent do
       {:error, changeset} ->
         {:noreply, assign(socket, :changeset, changeset)}
     end
+  end
+
+  defp toggle_amount_signal(attrs) do
+    toggle = Map.get(attrs, "toggle", "false")
+    Map.update(attrs, "amount", nil, fn
+      nil -> nil
+      value when toggle == "true" -> value
+      value -> "-#{value}"
+    end)
   end
 end

@@ -48,25 +48,4 @@ defmodule MonisApp.Finance.Transaction do
       end
     end)
   end
-
-  @doc false
-  def form_changeset(transaction, attrs) do
-    transaction
-    |> common_validation(attrs)
-    |> cast(attrs, [:toggle])
-    |> toggle_amount_signal()
-  end
-
-  defp toggle_amount_signal(changeset) do
-    toggle = get_change(changeset, :toggle)
-    amount = get_field(changeset, :amount) |> Decimal.abs()
-
-    if toggle do
-      changeset
-      |> put_change(:amount, amount)
-    else
-      changeset
-      |> put_change(:amount, Decimal.minus(amount))
-    end
-  end
 end
