@@ -1,7 +1,6 @@
 // We need to import the CSS so that webpack will load it.
 // The MiniCssExtractPlugin is used to separate it out into
-// its own CSS file.
-import "../css/app.scss";
+// its own CSS file.  import "../css/app.scss";
 
 // webpack automatically bundles all modules in your
 // entry points. Those entry points can be configured
@@ -113,6 +112,16 @@ Hooks.SelectPayee = {
     hook.pushEventTo(".select-payee-div", "payee-selected", { payee: payee });
   },
 };
+Hooks.DelayedCloseModal = {
+  mounted() {
+    const handleCloseEventListener = () => {
+      this.el.removeEventListener('close-modal', handleCloseEventListener);
+      this.pushEvent('close-modal');
+    }
+
+    this.el.addEventListener('close-modal', handleCloseEventListener);
+  }
+}
 
 let csrfToken = document
   .querySelector("meta[name='csrf-token']")
