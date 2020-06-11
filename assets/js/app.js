@@ -11,6 +11,7 @@
 //     import {Socket} from "phoenix"
 //     import socket from "./socket"
 //
+import css from '../css/app.scss'
 import "alpinejs";
 import "phoenix_html";
 import $ from "jquery";
