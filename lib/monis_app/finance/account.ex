@@ -18,5 +18,6 @@ defmodule MonisApp.Finance.Account do
     account
     |> cast(attrs, [:amount, :is_active, :type, :name])
     |> validate_required([:amount, :is_active, :type, :name])
+    |> unique_constraint(:name)
   end
 end

@@ -17,5 +17,6 @@ defmodule MonisApp.Finance.Category do
     |> cast(attrs, [:name, :type, :hidden])
     |> validate_required([:name, :type, :hidden])
     |> validate_inclusion(:type, ["expense", "transfer", "income"])
+    |> unique_constraint(:name)
   end
 end
