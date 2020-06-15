@@ -20,18 +20,18 @@ defmodule MonisApp.Finance do
   """
   def default_categories do
     categories = [
-      {"Income", "income"},
-      {"Groceries", "expense"},
-      {"Rent", "expense"},
-      {"Internet", "expense"},
-      {"Phone", "expense"},
-      {"Health", "expense"},
-      {"Dining Out", "expense"}
+      {"Income", "income", "Income"},
+      {"Groceries", "expense", "Recurring Expenses"},
+      {"Rent", "expense", "Recurring Expenses"},
+      {"Internet", "expense", "Recurring Expenses"},
+      {"Phone", "expense", "Recurring Expenses"},
+      {"Health", "expense", "Recurring Expenses"},
+      {"Dining Out", "expense", "For fun"}
     ]
 
     categories
-    |> Stream.map(fn {name, type} ->
-      Category.changeset(%Category{}, %{name: name, type: type})
+    |> Stream.map(fn {name, type, group} ->
+      Category.changeset(%Category{}, %{name: name, type: type, group: group})
     end)
     |> Enum.map(&Ecto.Changeset.apply_action!(&1, :validate))
   end

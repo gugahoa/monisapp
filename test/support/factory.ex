@@ -33,7 +33,8 @@ defmodule MonisApp.Factory do
   def category_factory() do
     %Category{
       name: sequence(:name, &"name-#{&1}"),
-      type: "expense"
+      type: "expense",
+      group: "Expenses"
     }
   end
 

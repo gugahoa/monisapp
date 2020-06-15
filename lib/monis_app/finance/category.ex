@@ -5,6 +5,7 @@ defmodule MonisApp.Finance.Category do
   schema "categories" do
     field :hidden, :boolean, default: false
     field :name, :string
+    field :group, :string
     field :type, :string
     belongs_to :user, MonisApp.Accounts.User
 
@@ -14,8 +15,8 @@ defmodule MonisApp.Finance.Category do
   @doc false
   def changeset(category, attrs) do
     category
-    |> cast(attrs, [:name, :type, :hidden])
-    |> validate_required([:name, :type, :hidden])
+    |> cast(attrs, [:name, :type, :hidden, :group])
+    |> validate_required([:name, :type, :hidden, :group])
     |> validate_inclusion(:type, ["expense", "transfer", "income"])
     |> unique_constraint(:name)
   end
