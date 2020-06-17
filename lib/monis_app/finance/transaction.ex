@@ -17,16 +17,11 @@ defmodule MonisApp.Finance.Transaction do
     timestamps()
   end
 
-  defp common_validation(changeset, attrs) do
-    changeset
-    |> cast(attrs, [:payee, :amount, :note, :account_id, :category_id])
-    |> validate_required([:payee, :amount, :category_id, :account_id])
-  end
-
   @doc false
   def changeset(transaction, user, attrs) do
     transaction
-    |> common_validation(attrs)
+    |> cast(attrs, [:payee, :amount, :note, :account_id, :category_id])
+    |> validate_required([:payee, :amount, :category_id, :account_id])
     |> assoc_constraint(:account)
     |> assoc_constraint(:category)
     |> prepare_changes(fn changeset ->
