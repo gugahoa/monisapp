@@ -66,4 +66,3 @@ defmodule MonisApp.ReleaseTasks do
     :init.stop()
   end
 end
-

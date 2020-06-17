@@ -89,6 +89,7 @@ defmodule MonisAppWeb.TransactionModalComponent do
 
   defp toggle_amount_signal(attrs) do
     toggle = Map.get(attrs, "toggle", "false")
+
     Map.update(attrs, "amount", nil, fn
       nil -> nil
       value when toggle == "true" -> value
