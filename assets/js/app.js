@@ -11,7 +11,7 @@
 //     import {Socket} from "phoenix"
 //     import socket from "./socket"
 //
-import css from '../css/app.scss'
+import css from "../css/app.scss";
 import "alpinejs";
 import "phoenix_html";
 import $ from "jquery";
@@ -19,6 +19,7 @@ import "select2/dist/js/select2.full.js";
 import { Socket } from "phoenix";
 import NProgress from "nprogress";
 import { LiveSocket } from "phoenix_live_view";
+import IMask from "imask";
 
 let Hooks = {};
 Hooks.SelectAccount = {
@@ -116,13 +117,38 @@ Hooks.SelectPayee = {
 Hooks.DelayedCloseModal = {
   mounted() {
     const handleCloseEventListener = () => {
-      this.el.removeEventListener('close-modal', handleCloseEventListener);
-      this.pushEvent('close-modal');
-    }
+      this.el.removeEventListener("close-modal", handleCloseEventListener);
+      this.pushEvent("close-modal");
+    };
 
-    this.el.addEventListener('close-modal', handleCloseEventListener);
-  }
-}
+    this.el.addEventListener("close-modal", handleCloseEventListener);
+  },
+};
+Hooks.CurrencyMask = {
+  mounted() {
+    this.setupMask(this.el);
+  },
+
+  beforeUpdate() {
+    this.setupMask(this.el);
+  },
+
+  setupMask(el) {
+    const mask = {
+      mask: "$ num",
+      blocks: {
+        num: {
+          mask: Number,
+          padFractionalZeros: true,
+          thousandsSeparator: ",",
+          radix: ".",
+          signed: false,
+        },
+      },
+    };
+    this.mask = IMask(el, mask);
+  },
+};
 
 let csrfToken = document
   .querySelector("meta[name='csrf-token']")

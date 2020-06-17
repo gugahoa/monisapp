@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "alpinejs": "^2.3.3",
+    "imask": "^6.0.5",
     "jquery": "^3.5.1",
     "nprogress": "^0.2.0",
     "phoenix": "file:../deps/phoenix",
