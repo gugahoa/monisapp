@@ -1,27 +1,36 @@
-<div class="flex items-center justify-center flex-grow ">
-  <div class="flex flex-col w-full max-w-md p-12 bg-white shadow">
-    <h1 class="px-10 mb-2 text-2xl font-semibold text-center">Cadastre-se</h1>
+<div class="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
+  <div class="w-full max-w-md">
+    <div>
+      <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-900 leading-9">
+        Sign up to Monis App
+      </h2>
+      <p class="mt-2 text-sm text-center text-gray-600 leading-5">
+        Already have an account?
+        <%= link " Sign in", to: Routes.user_session_path(@conn, :new), class: "font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150" %>
+      </p>
+    </div>
+    <%= form_for @changeset, Routes.user_registration_path(@conn, :create), [as: :user, class: "mt-8 bg-white rounded-lg p-8 shadow"], fn f -> %>
+      <div>
+        <%= label f, :email, "Email address", class: "font-semibold text-gray-600 text-sm" %>
+        <%= text_input f, :email, aria_label: "Email address", type: "email", required: true, class: "appearance-none relative block w-full px-3 py-2 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" %>
+        <%= error_tag f, :email, class: "-mb-6" %>
+      </div>
+      <div class="mt-6">
+        <%= label f, :password, class: "font-semibold text-gray-600 text-sm" %>
+        <%= password_input f, :password, aria_label: "Password", requried: true, class: "relative block w-full px-3 py-2 text-gray-900 border border-gray-300 appearance-none rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" %>
+        <%= error_tag f, :password, class: "-mb-6" %>
+      </div>
+      <div class="mt-6">
+        <%= label f, :password_confirmation, class: "font-semibold text-gray-600 text-sm" %>
+        <%= password_input f, :password_confirmation, aria_label: "Password", requried: true, class: "relative block w-full px-3 py-2 text-gray-900 border border-gray-300 appearance-none rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" %>
+        <%= error_tag f, :password_confirmation, class: "-mb-6" %>
+      </div>
 
-    <%= form_for @changeset, Routes.user_registration_path(@conn, :create), [class: "flex flex-col mt-4"], fn f -> %>
-      <%= label f, :email, class: "text-sm font-semibold text-gray-600" %>
-      <%= text_input f, :email, class: "mb-2 p-3 border border-gray-200 focus:border-blue-400 rounded" %>
-      <%= error_tag f, :email, class: "-mt-2" %>
-
-      <%= label f, :password, class: "text-sm font-semibold text-gray-600" %>
-      <%= password_input f, :password, class: "mb-2 p-3 border border-gray-200 focus:border-blue-400 rounded" %>
-      <%= error_tag f, :password, class: "-mt-2" %>
-
-      <%= label f, :password_confirmation, class: "text-sm font-semibold text-gray-600" %>
-      <%= password_input f, :password_confirmation, class: "mb-2 p-3 border border-gray-200 focus:border-blue-400 rounded" %>
-      <%= error_tag f, :password_confirmation, class: "-mt-2" %>
-
-      <%= submit "Registre-se", class: "mt-4 bg-blue-700 h-12 text-white rounded hover:bg-blue-600" %>
+      <div class="mt-10">
+        <button type="submit" class="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent group leading-5 rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+          Sign up
+        </button>
+      </div>
     <% end %>
-
-    <p class="self-center mt-4 text-sm text-gray-700">
-      <span>Já possui conta? </span>
-      <%= link "Faça login", to: Routes.user_session_path(@conn, :new), class: "text-blue-700 cursor-pointer hover:text-blue-400" %>
-    </p>
   </div>
 </div>
-
