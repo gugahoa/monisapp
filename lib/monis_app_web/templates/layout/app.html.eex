@@ -1,11 +1,17 @@
 <main role="main" class="flex flex-col flex-grow">
   <div class="absolute inset-x-0 z-10 max-w-3xl p-4 mx-auto"
-       x-data="{ show_info: <%= get_flash(@conn, :info) != nil %>, show_error: <%= get_flash(@conn, :error) != nil %> }"
-       >
+       x-data="{ show_info: false, show_error: false }"
+       x-init="$nextTick(() => {
+               show_info = <%= get_flash(@conn, :info) != nil %>;
+               show_error = <%= get_flash(@conn, :error) != nil %> ;
+               })">
     <div
       class="flex items-center p-4 mb-4 font-semibold text-green-700 bg-green-200 rounded-lg shadow-md transform transition-all"
       x-show="show_info"
-      x-transition:leave="ease-out duration-200"
+      x-transition:enter="ease-in duration-200"
+      x-transition:enter-start="-translate-y-4 opacity-0"
+      x-transition:enter-end="translate-y-0 opacity-100"
+      x-transition:leave="ease-out duration-300"
       x-transition:leave-start="translate-y-0 opacity-100"
       x-transition:leave-end="-translate-y-4 opacity-0"
     >
@@ -28,7 +34,10 @@
     <div
       class="flex items-center p-4 font-semibold text-red-700 bg-red-100 rounded-lg shadow-md transform transition-all"
       x-show="show_error"
-      x-transition:leave="ease-out duration-200"
+      x-transition:enter="ease-in duration-200"
+      x-transition:enter-start="-translate-y-4 opacity-0"
+      x-transition:enter-end="translate-y-0 opacity-100"
+      x-transition:leave="ease-out duration-300"
       x-transition:leave-start="translate-y-0 opacity-100"
       x-transition:leave-end="-translate-y-4 opacity-0"
     >
