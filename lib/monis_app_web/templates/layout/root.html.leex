@@ -12,15 +12,9 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tailwindcss/ui@latest/dist/tailwind-ui.min.css">
   </head>
   <body class="flex flex-col w-screen min-h-screen bg-indigo-200">
-    <header>
-      <section class="container">
-        <nav class="flex items-center h-16" role="navigation">
-          <%= render "_user_menu.html", assigns %>
-        </nav>
-      </section>
-    </header>
     <%= @inner_content %>
   </body>
 </html>
