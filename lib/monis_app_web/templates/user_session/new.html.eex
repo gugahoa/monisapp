@@ -1,30 +1,49 @@
-<div class="flex items-center justify-center flex-grow ">
-  <div class="flex flex-col w-full max-w-md p-12 bg-white shadow">
-    <h1 class="px-10 mb-2 text-2xl font-semibold text-center">Faça login na sua conta</h1>
-    <%= if @error_message do %>
-      <p class="alert alert-danger">
-        <%= @error_message %>
+<div class="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
+  <div class="w-full max-w-md">
+    <div>
+      <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-900 leading-9">
+        Sign in to your account
+      </h2>
+      <p class="mt-2 text-sm text-center text-gray-600 leading-5">
+        Or
+        <%= link " start your unlimited free tial", to: Routes.user_registration_path(@conn, :new), class: "font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150" %>
       </p>
+    </div>
+    <%= form_for @conn, Routes.user_session_path(@conn, :create), [as: :user, class: "mt-8"], fn f -> %>
+      <div class="rounded-md shadow-sm">
+        <div>
+          <%= text_input f, :email, aria_label: "Email address", type: "email", required: true, class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5", placeholder: "Email address" %>
+        </div>
+        <div class="-mt-px">
+          <%= password_input f, :password, aria_label: "Password", requried: true, class: "relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5", placeholder: "Password" %>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between mt-6">
+        <div class="flex items-center">
+          <%= checkbox f, :remember_me, class: "w-4 h-4 text-indigo-600 form-checkbox transition duration-150 ease-in-out" %>
+          <label for="user_remember_me" class="block ml-2 text-sm text-gray-900 leading-5">
+            Remember me
+          </label>
+        </div>
+
+        <div class="text-sm leading-5">
+          <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+            Forgot your password?
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <button type="submit" class="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent group leading-5 rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+            <svg class="w-5 h-5 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+            </svg>
+          </span>
+          Sign in
+        </button>
+      </div>
     <% end %>
-
-    <%= form_for @conn, Routes.user_session_path(@conn, :create), [as: :user, class: "flex flex-col mt-4"], fn f -> %>
-      <%= label f, :email, class: "text-sm font-semibold text-gray-600" %>
-      <%= text_input f, :email, class: "mb-2 p-3 border border-gray-200 focus:border-blue-400 rounded" %>
-
-      <%= label f, :password, class: "text-sm font-semibold text-gray-600" %>
-      <%= password_input f, :password, class: "mb-2 p-3 border border-gray-200 focus:border-blue-400 rounded" %>
-
-      <label for="user_remember_me" class="mb-5 text-xs cursor-pointer">
-        <%= checkbox f, :remember_me %>
-        <span class="ml-1">Lembrar de mim</span>
-      </label>
-
-      <%= submit "Login", class: "bg-blue-700 h-12 text-white rounded hover:bg-blue-600" %>
-    <% end %>
-
-    <p class="self-center mt-4 text-sm text-gray-700">
-      <span>Não possui conta? </span>
-      <%= link "Cadastre-se", to: Routes.user_registration_path(@conn, :new), class: "text-blue-700 cursor-pointer hover:text-blue-400" %>
-    </p>
   </div>
 </div>

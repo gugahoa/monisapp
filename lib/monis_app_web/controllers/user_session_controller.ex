@@ -14,7 +14,9 @@ defmodule MonisAppWeb.UserSessionController do
     if user = Accounts.get_user_by_email_and_password(email, password) do
       UserAuth.login_user(conn, user, user_params)
     else
-      render(conn, "new.html", error_message: "Invalid email and password combination")
+      conn
+      |> put_flash(:error, "Invalid email and password combination")
+      |> render("new.html")
     end
   end
 
