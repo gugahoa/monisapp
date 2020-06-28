@@ -1,7 +1,8 @@
 <%= if @current_user do %>
 <header class="bg-indigo-700 sm:h-32">
   <section class="container flex justify-between w-full mx-auto">
-    <nav class="flex items-center h-16">
+    <nav class="flex items-center h-16" role="navigation" aria-labelledby="nav1">
+      <h1 class="hidden" id="nav1">Website navigation area</h1>
       <ul class="flex px-4">
         <li>
           <%= link "Budget",
@@ -15,7 +16,8 @@
         </li>
       </ul>
     </nav>
-    <nav class="flex items-center h-16" role="navigation">
+    <nav class="flex items-center h-16" role="navigation" aria-labelledby="nav2">
+      <h1 class="hidden" id="nav2">User naviation area</h1>
       <ul class="px-4 ml-auto">
         <li>
           <%= button "Logout",
