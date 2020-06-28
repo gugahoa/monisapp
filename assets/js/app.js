@@ -19,8 +19,8 @@ import "select2/dist/js/select2.full.js";
 import { Socket } from "phoenix";
 import NProgress from "nprogress";
 import { LiveSocket } from "phoenix_live_view";
-import IMask from "imask";
 import flatpickr from "flatpickr";
+import {toCurrency} from "./currency-conversion";
 
 let Hooks = {};
 Hooks.DatePicker = {
@@ -143,28 +143,8 @@ Hooks.DelayedCloseModal = {
   },
 };
 Hooks.CurrencyMask = {
-  mounted() {
-    this.setupMask(this.el);
-  },
-
   beforeUpdate() {
-    this.setupMask(this.el);
-  },
-
-  setupMask(el) {
-    const mask = {
-      mask: "$ num",
-      blocks: {
-        num: {
-          mask: Number,
-          padFractionalZeros: true,
-          thousandsSeparator: ",",
-          radix: ".",
-          signed: false,
-        },
-      },
-    };
-    this.mask = IMask(el, mask);
+    this.el.value = toCurrency(this.el.value);
   },
 };
 

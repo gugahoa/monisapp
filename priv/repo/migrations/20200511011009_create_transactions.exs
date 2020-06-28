@@ -3,11 +3,11 @@ defmodule MonisApp.Repo.Migrations.CreateTransactions do
 
   def change do
     create table(:transactions) do
-      add :payee, :string
-      add :amount, :decimal
-      add :note, :string
-      add :category_id, references(:categories, on_delete: :nothing)
-      add :account_id, references(:accounts, on_delete: :nothing)
+      add :payee, :string, null: false
+      add :amount, :decimal, null: false
+      add :note, :string, null: false
+      add :category_id, references(:categories, on_delete: :nothing), null: false
+      add :account_id, references(:accounts, on_delete: :nothing), null: false
 
       timestamps()
     end
