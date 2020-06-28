@@ -2,6 +2,7 @@
 <main role="main" class="flex flex-col flex-grow">
   <div class="absolute inset-x-0 z-10 max-w-3xl p-4 mx-auto"
        x-data="{ show_info: false, show_error: false }"
+       x-show="<%= get_flash(@conn, :info) != nil %> || <%= get_flash(@conn, :error) != nil %>"
        x-init="$nextTick(() => {
                show_info = <%= get_flash(@conn, :info) != nil %>;
                show_error = <%= get_flash(@conn, :error) != nil %> ;
