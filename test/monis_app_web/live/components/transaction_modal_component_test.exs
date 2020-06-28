@@ -37,7 +37,8 @@ defmodule MonisAppWeb.TransactionModalComponentTest do
                  payee: "Payee",
                  note: "Example note",
                  toggle: true,
-                 amount: 15
+                 amount: 15,
+                 date: "2020-06-20"
                }
              })
              |> render_submit()
@@ -72,7 +73,8 @@ defmodule MonisAppWeb.TransactionModalComponentTest do
                  payee: "Payee",
                  note: "Example note",
                  toggle: false,
-                 amount: 15
+                 amount: 15,
+                 date: "2020-06-20"
                }
              })
              |> render_submit()

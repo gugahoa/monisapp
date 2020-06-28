@@ -37,7 +37,6 @@
       x-transition:leave="ease-in duration-200" 
       x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" 
       x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-      @click.away="open_transaction_modal = false"
       @keyup.window.escape="open_transaction_modal = false"
       >
       <%= f= form_for @changeset, "#", [phx_target: @myself, phx_change: "change-forms", phx_submit: "create-transaction", class: "w-full sm:w-auto"] %>
@@ -114,6 +113,8 @@
                 <div>
                   <%= label f, :note, class: "block text-sm font-medium text-left text-gray-700 leading-5" %>
                   <%= text_input f, :note, class: "block w-full h-10 form-input", placeholder: "Dinner ingredients" %>
+                  <%= label f, :date, class: "block text-sm font-medium text-left text-gray-700 leading-5" %>
+                  <%= text_input f, :date, phx_hook: "DatePicker", class: "block w-full h-10 form-input" %>
                 </div>
               </div>
             </div>

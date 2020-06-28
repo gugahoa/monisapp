@@ -54,7 +54,8 @@ defmodule MonisApp.FinanceTest do
                  account_id: account.id,
                  category_id: category.id,
                  payee: "test",
-                 amount: 10
+                 amount: 10,
+                 date: Date.utc_today()
                })
 
       assert "does not belong to user" in errors_on(changeset).category
@@ -72,7 +73,8 @@ defmodule MonisApp.FinanceTest do
                  account_id: account.id,
                  category_id: category.id,
                  payee: "example",
-                 amount: 10
+                 amount: 10,
+                 date: Date.utc_today()
                })
     end
 

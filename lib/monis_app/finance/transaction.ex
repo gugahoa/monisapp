@@ -8,6 +8,7 @@ defmodule MonisApp.Finance.Transaction do
     field :amount, :decimal
     field :note, :string
     field :payee, :string
+    field :date, :date
 
     field :toggle, :boolean, default: false, virtual: true
 
@@ -20,8 +21,8 @@ defmodule MonisApp.Finance.Transaction do
   @doc false
   def changeset(transaction, user, attrs) do
     transaction
-    |> cast(attrs, [:payee, :amount, :note, :account_id, :category_id])
-    |> validate_required([:payee, :amount, :category_id, :account_id])
+    |> cast(attrs, [:payee, :amount, :note, :account_id, :category_id, :date])
+    |> validate_required([:payee, :amount, :category_id, :account_id, :date])
     |> assoc_constraint(:account)
     |> assoc_constraint(:category)
     |> prepare_changes(fn changeset ->

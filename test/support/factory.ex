@@ -43,7 +43,8 @@ defmodule MonisApp.Factory do
       payee: sequence(:payee, &"Payee #{&1}"),
       note: "Some note",
       account: build(:account),
-      category: build(:category)
+      category: build(:category),
+      date: Date.utc_today()
     }
   end
 end

@@ -20,8 +20,26 @@ import { Socket } from "phoenix";
 import NProgress from "nprogress";
 import { LiveSocket } from "phoenix_live_view";
 import IMask from "imask";
+import flatpickr from "flatpickr";
 
 let Hooks = {};
+Hooks.DatePicker = {
+  mounted() {
+    this.setupDatePicker(this.el);
+  },
+
+  updated() {
+    this.setupDatePicker(this.el);
+  },
+
+  setupDatePicker(el) {
+    flatpickr(el, {
+      altInput: true,
+      defaultDate: new Date(),
+      enableTime: false,
+    })
+  }
+}
 Hooks.SelectAccount = {
   initSelect2() {
     let hook = this,
@@ -166,8 +184,8 @@ let liveSocket = new LiveSocket("/live", Socket, {
 });
 
 // Show progress bar on live navigation and form submits
-window.addEventListener("phx:page-loading-start", (info) => NProgress.start());
-window.addEventListener("phx:page-loading-stop", (info) => NProgress.done());
+window.addEventListener("phx:page-loading-start", (_) => NProgress.start());
+window.addEventListener("phx:page-loading-stop", (_) => NProgress.done());
 
 // connect if there are any LiveViews on the page
 liveSocket.connect();

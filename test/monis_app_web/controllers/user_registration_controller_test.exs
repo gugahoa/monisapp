@@ -7,8 +7,8 @@ defmodule MonisAppWeb.UserRegistrationControllerTest do
     test "renders registration page", %{conn: conn} do
       conn = get(conn, Routes.user_registration_path(conn, :new))
       response = html_response(conn, 200)
-      assert response =~ "Cadastre-se</h1>"
-      assert response =~ "login</a>"
+      assert response =~ "Sign up"
+      assert response =~ "Sign in"
     end
 
     test "redirects if already logged in", %{conn: conn} do
@@ -49,7 +49,7 @@ defmodule MonisAppWeb.UserRegistrationControllerTest do
         })
 
       response = html_response(conn, 200)
-      assert response =~ "Cadastre-se</h1>"
+      assert response =~ "Sign up"
       assert response =~ "must have the @ sign and no spaces"
       assert response =~ "should be at least 12 character"
     end
