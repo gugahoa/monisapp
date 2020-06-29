@@ -150,12 +150,6 @@ defmodule MonisApp.Finance do
 
   alias MonisApp.Finance.Account
 
-  def search_accounts(account_name) do
-    Account
-    |> where([a], ilike(a.name, ^"#{account_name}%"))
-    |> Repo.all()
-  end
-
   @doc """
   Returns the list of accounts.
 
