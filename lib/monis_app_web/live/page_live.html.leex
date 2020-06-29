@@ -21,20 +21,17 @@
       <h1 class="text-xl font-semibold md:text-2xl">Accounts</h1>
 
       <ul class="flex flex-col">
+      <%= for balance <- list_balances @current_user do %>
         <li class="my-2">
           <div class="flex justify-between">
-            <span class="font-medium">NuConta</span>
-            <span class="ml-6 font-semibold text-green-700">+$4,000.00</span>
+            <span class="font-medium"><%= balance.account.name %></span>
+            <span class="ml-6 font-semibold <%= balance_color(balance.balance) %>">
+              <%= Number.Currency.number_to_currency(balance.balance) %>
+            </span>
           </div>
-          <span class="-mt-2 text-xs">Last transaction was 3 days ago</span>
+          <span class="-mt-2 text-xs"><%= last_transaction_text(balance.last_transaction_date) %></span>
         </li>
-        <li class="my-2">
-          <div class="flex justify-between">
-            <span class="font-medium">NuConta</span>
-            <span class="ml-6 font-semibold text-green-700">+$4,000.00</span>
-          </div>
-          <span class="text-xs">Last transaction was 3 days ago</span>
-        </li>
+      <% end %>
       </ul>
     </div>
   </div>

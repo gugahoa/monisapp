@@ -47,7 +47,9 @@ defmodule MonisApp.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:bcrypt_elixir, "~> 2.0"},
-      {:ex_machina, "~> 2.4"}
+      {:ex_machina, "~> 2.4"},
+      {:timex, "~> 3.0"},
+      {:number, "~> 1.0"}
     ]
   end
 
