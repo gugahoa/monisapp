@@ -10,6 +10,8 @@ defmodule MonisApp.Finance.Account do
 
     belongs_to :user, MonisApp.Accounts.User
 
+    has_many :transactions, MonisApp.Finance.Transaction
+
     timestamps()
   end
 

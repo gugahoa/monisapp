@@ -83,4 +83,56 @@ defmodule MonisApp.FinanceTest do
       assert %Ecto.Changeset{} = Finance.change_transaction(user, %Transaction{})
     end
   end
+
+  describe "balances" do
+    test "list_balances/1 returns empty list when there's no accounts" do
+      assert [] == Finance.list_balances(insert(:user))
+    end
+
+    test "list_balances/1 when there's no transaction returns balance 0" do
+      user = insert(:user)
+      account_id = insert(:account, user: user).id
+
+      zero = Decimal.new(0)
+      assert [%{account: %{id: ^account_id}, balance: ^zero}] = Finance.list_balances(user)
+    end
+
+    test "list_balances/1 returns a list with accounts, their balance and last transaction date" do
+      user = insert(:user)
+      account = insert(:account, user: user)
+
+      insert(:transaction,
+        account: account,
+        amount: -7_000,
+        date: ~D[2020-06-21]
+      )
+
+      insert(:transaction,
+        account: account,
+        amount: 15_000,
+        date: ~D[2020-06-20]
+      )
+
+      balance = Decimal.new(8_000)
+      account_id = account.id
+
+      assert [
+               %{
+                 account: %{id: ^account_id},
+                 balance: ^balance,
+                 last_transaction_date: ~D[2020-06-21]
+               }
+             ] = Finance.list_balances(user)
+    end
+
+    test "list_balances/1 takes into consideration starting balance" do
+      user = insert(:user)
+      account = insert(:account, user: user, starting_balance: 1_000)
+
+      insert(:transaction, account: account, amount: 15_000)
+      balance = Decimal.new(16_000)
+      account_id = account.id
+      assert [%{account: %{id: ^account_id}, balance: ^balance}] = Finance.list_balances(user)
+    end
+  end
 end

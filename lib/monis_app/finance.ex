@@ -151,6 +151,28 @@ defmodule MonisApp.Finance do
   alias MonisApp.Finance.Account
 
   @doc """
+  Returns the balance of all user's accounts.
+
+  ## Examples
+
+      iex> list_balances(user)
+      [%{account: %Account{}, balance: #Decimal<15.45>}, ...]
+
+  """
+  def list_balances(user) do
+    Account
+    |> where([a], a.user_id == ^user.id)
+    |> join(:left, [a], t in assoc(a, :transactions))
+    |> select([a, t], %{
+      account: a,
+      balance: coalesce(sum(t.amount), 0) + a.starting_balance,
+      last_transaction_date: max(t.date)
+    })
+    |> group_by([a], a.id)
+    |> Repo.all()
+  end
+
+  @doc """
   Returns the list of accounts.
 
   ## Examples
