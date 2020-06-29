@@ -44,7 +44,8 @@ defmodule MonisApp.Factory do
       note: "Some note",
       account: build(:account),
       category: build(:category),
-      date: Date.utc_today()
+      date: Date.utc_today(),
+      amount: 10_000
     }
   end
 end

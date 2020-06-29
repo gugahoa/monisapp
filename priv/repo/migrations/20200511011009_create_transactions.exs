@@ -5,7 +5,7 @@ defmodule MonisApp.Repo.Migrations.CreateTransactions do
     create table(:transactions) do
       add :payee, :string, null: false
       add :amount, :decimal, null: false
-      add :note, :string, null: false
+      add :note, :string
       add :category_id, references(:categories, on_delete: :nothing), null: false
       add :account_id, references(:accounts, on_delete: :nothing), null: false
 
