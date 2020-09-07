@@ -21,7 +21,7 @@ defmodule MonisApp.Finance.Transaction do
   @doc false
   def changeset(transaction, user, attrs) do
     transaction
-    |> cast(attrs, [:payee, :amount, :note, :account_id, :category_id, :date])
+    |> cast(attrs, [:payee, :toggle, :amount, :note, :account_id, :category_id, :date])
     |> validate_required([:payee, :amount, :category_id, :account_id, :date])
     |> assoc_constraint(:account)
     |> assoc_constraint(:category)

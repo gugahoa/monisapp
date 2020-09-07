@@ -143,9 +143,11 @@ Hooks.DelayedCloseModal = {
   },
 };
 Hooks.CurrencyMask = {
-  beforeUpdate() {
-    this.el.value = toCurrency(this.el.value);
-  },
+  mounted() {
+    this.el.addEventListener("input", _ => {
+      this.el.value = toCurrency(this.el.value);
+    });
+  }
 };
 
 let csrfToken = document
