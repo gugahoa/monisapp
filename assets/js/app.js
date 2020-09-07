@@ -35,11 +35,11 @@ Hooks.DatePicker = {
   setupDatePicker(el) {
     flatpickr(el, {
       altInput: true,
-      defaultDate: new Date(),
+      defaultDate: this.el.value || new Date(),
       enableTime: false,
-    })
+    });
   }
-}
+};
 Hooks.SelectAccount = {
   initSelect2() {
     let hook = this,
