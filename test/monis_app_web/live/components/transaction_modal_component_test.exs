@@ -28,22 +28,23 @@ defmodule MonisAppWeb.TransactionModalComponentTest do
            |> element("#open-transaction-modal")
            |> render_click() =~ "Add transaction"
 
-    assert {:ok, view, html} =
-             view
-             |> form("form[phx-submit='create-transaction']", %{
-               transaction: %{
-                 account_id: account.id,
-                 category_id: category.id,
-                 payee: "Payee",
-                 note: "Example note",
-                 toggle: true,
-                 amount: 15,
-                 date: "2020-06-20"
-               }
-             })
-             |> render_submit()
-             |> follow_redirect(conn, Routes.live_path(conn, MonisAppWeb.PageLive))
+    view
+    |> form("form[phx-submit='create-transaction']", %{
+      transaction: %{
+        account_id: account.id,
+        category_id: category.id,
+        payee: "Payee",
+        note: "Example note",
+        toggle: true,
+        amount: 15,
+        date: "2020-06-20"
+      }
+    })
+    |> render_submit()
 
+    assert_patch(view, Routes.live_path(conn, MonisAppWeb.PageLive, close_modal: true))
+
+    html = render(view)
     assert html =~ "successfully created"
     refute html =~ "Add transaction"
 
@@ -64,22 +65,23 @@ defmodule MonisAppWeb.TransactionModalComponentTest do
            |> element("#open-transaction-modal")
            |> render_click() =~ "Add transaction"
 
-    assert {:ok, view, html} =
-             view
-             |> form("form[phx-submit='create-transaction']", %{
-               transaction: %{
-                 account_id: account.id,
-                 category_id: category.id,
-                 payee: "Payee",
-                 note: "Example note",
-                 toggle: false,
-                 amount: 15,
-                 date: "2020-06-20"
-               }
-             })
-             |> render_submit()
-             |> follow_redirect(conn, Routes.live_path(conn, MonisAppWeb.PageLive))
+    view
+    |> form("form[phx-submit='create-transaction']", %{
+      transaction: %{
+        account_id: account.id,
+        category_id: category.id,
+        payee: "Payee",
+        note: "Example note",
+        toggle: false,
+        amount: 15,
+        date: "2020-06-20"
+      }
+    })
+    |> render_submit()
 
+    assert_patched(view, Routes.live_path(conn, MonisAppWeb.PageLive, close_modal: true))
+
+    html = render(view)
     assert html =~ "successfully created"
     refute html =~ "Add transaction"
 

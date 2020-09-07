@@ -77,8 +77,9 @@ defmodule MonisAppWeb.TransactionModalComponent do
       {:ok, _transaction} ->
         socket =
           socket
-          |> put_flash(:info, "Transaction successfully created!")
-          |> push_redirect(to: Routes.live_path(socket, MonisAppWeb.PageLive))
+          |> push_patch(to: Routes.live_path(socket, MonisAppWeb.PageLive, close_modal: true))
+
+        MonisAppWeb.NotificationsLive.success(user, "Transaction successfully created!")
 
         {:noreply, socket}
 
