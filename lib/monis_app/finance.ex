@@ -166,7 +166,7 @@ defmodule MonisApp.Finance do
     |> select([a, t], %{
       account: a,
       balance: coalesce(sum(t.amount), 0) + a.starting_balance,
-      last_transaction_date: max(t.date)
+      last_transaction_date: max(t.inserted_at)
     })
     |> group_by([a], a.id)
     |> Repo.all()
