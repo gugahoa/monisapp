@@ -104,13 +104,15 @@ defmodule MonisApp.FinanceTest do
       insert(:transaction,
         account: account,
         amount: -7_000,
-        date: ~D[2020-06-21]
+        date: ~D[2020-06-21],
+        inserted_at: ~N[2020-06-22 18:00:00]
       )
 
       insert(:transaction,
         account: account,
         amount: 15_000,
-        date: ~D[2020-06-20]
+        date: ~D[2020-06-20],
+        inserted_at: ~N[2020-06-22 19:00:00]
       )
 
       balance = Decimal.new(8_000)
@@ -120,7 +122,7 @@ defmodule MonisApp.FinanceTest do
                %{
                  account: %{id: ^account_id},
                  balance: ^balance,
-                 last_transaction_date: ~D[2020-06-21]
+                 last_transaction_date: ~N[2020-06-22 19:00:00]
                }
              ] = Finance.list_balances(user)
     end
