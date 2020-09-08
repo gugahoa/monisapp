@@ -84,7 +84,12 @@ defmodule MonisAppWeb.TransactionModalComponent do
         {:noreply, socket}
 
       {:error, changeset} ->
-        {:noreply, assign(socket, :changeset, changeset)}
+        {:noreply,
+         assign(
+           socket,
+           :changeset,
+           Finance.change_transaction(user, %Transaction{}, make_amount_absolute(attrs))
+         )}
     end
   end
 
@@ -95,6 +100,18 @@ defmodule MonisAppWeb.TransactionModalComponent do
       nil -> nil
       value when toggle == "true" -> value
       value -> "-#{value}"
+    end)
+  end
+
+  defp make_amount_absolute(attrs) do
+    Map.update(attrs, "amount", nil, fn
+      nil ->
+        nil
+
+      value ->
+        value
+        |> Decimal.cast()
+        |> Decimal.abs()
     end)
   end
 end

@@ -15,7 +15,7 @@ defmodule MonisAppWeb.PageLive do
   end
 
   def handle_params(params, _, socket) do
-    close_modal = Map.get(params, "close_modal", true)
+    close_modal = Map.get(params, "close_modal", false)
     {:noreply, assign(socket, :open_modal, !close_modal)}
   end
 
